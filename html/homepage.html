@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+
+    <!-- Testing out how to change styles of specific parts of the calendar -->
+    <style>
+
+        /* Optionally adjust spacing so the scaled calendar doesn't overflow */
+        #inline-calendar-home {
+            overflow: visible;
+            width: fit-content;
+        }
+
+        /* Added homepage class so it only affects the calendar on the homepage */
+        .homepage-body .flatpickr-calendar {
+            transform: scale(1.7);
+            transform-origin: top left;
+            z-index: 9999;
+        }
+
+        .flatpickr-months {
+            background-color: var(--purple);
+            color: var(--light);
+            border-bottom: 1px solid var(--dark);
+        }
+
+        .flatpickr-day.selected {
+            background: var(--red);
+            color: white;
+        }
+
+        
+    </style>
+
+</head>
+
+<body class="homepage-body">
+
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-5 mt-5">
+                <div id="inline-calendar-home"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Calendar script -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+        flatpickr("#inline-calendar-home", {
+            inline: true,
+            dateFormat: "d-m-Y",
+            minDate: "today",
+            onChange: function(selectedDates, dateStr) {
+                console.log("Selected date:", dateStr);
+            }
+        });
+    </script>
+
+</body>
