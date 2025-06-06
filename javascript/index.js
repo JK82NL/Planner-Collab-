@@ -51,3 +51,18 @@ function delAppointment(index) {
   saveAppointments();
   showAppointments();
 }
+
+function changeAppointment(index) {// Function to load an appointment into the form for editing
+  const appointment = appointments[index]; // Get the appointment object from the appointments array
+  titleEl.value = appointment.title; // Load the appointment details into the form fields
+  dateEl.value = appointment.date; // Load the appointment date
+  beginEl.value = appointment.startTime; // Load the appointment start time
+  endEl.value = appointment.endTime; // Load the appointment end time
+  locationEl.value = appointment.location; // Load the appointment location
+  descriptionEl.value = appointment.description; // Load the appointment description
+
+  // Remove the appointment from the list after loading it into the form
+  appointments.splice(index, 1);
+  saveAppointments();
+  showAppointments();
+}
