@@ -10,34 +10,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="UTF-8">
 
-    <!-- Testing out how to change styles of specific parts of the calendar -->
+    
     <style>
-
-        /* Optionally adjust spacing so the scaled calendar doesn't overflow */
+        /* Adjust spacing so the scaled calendar doesn't overflow */
         #inline-calendar-home {
             overflow: visible;
             width: fit-content;
         }
 
-        /* Added homepage class so it only affects the calendar on the homepage */
+        /* Scaled calendar to be bigger, added in style so it only affects this calendar not the standard calendar in the form. */
         .homepage-body .flatpickr-calendar {
             transform: scale(1.7);
             transform-origin: top left;
             z-index: 9999;
-        }
-
-        .flatpickr-months {
-            background-color: var(--purple);
-            color: var(--light);
-            border-bottom: 1px solid var(--dark);
-        }
-
-        .flatpickr-day.selected {
-            background: var(--red);
-            color: white;
-        }
-
-        
+        }        
     </style>
 
 </head>
@@ -53,7 +39,7 @@
 
     </div>
 
-    <!-- Calendar script -->
+    <!-- Calendar script Flatpickr -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script>
