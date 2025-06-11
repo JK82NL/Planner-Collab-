@@ -3,6 +3,7 @@
     /* border: 1px solid gray; */
 }
 
+/* color variables */
 :root {
     --light: #ffffff;
     --yellow: #f0b36f;
@@ -12,17 +13,23 @@
     --dark: #3f1734;
 }
 
-/* LOADS CUSTOM FONT */
+/* Loads custom font */
 @font-face {
     font-family: Nunito Sans;
     src: url(NunitoSans-Italic-VariableFont_YTLCopszwdthwght.ttf);
     font-style: Nunito Sans Italic;
     src: url(NunitoSans-VariableFont_YTLCopszwdthwght.ttf);
 }
+/* Dot indicates appointments on that specific day in the calendar */
+.dot-indicator {
+    display: block;
+    width: 6px;
+    height: 6px;
+    background-color: red;
+    border-radius: 50%;
+    margin: 2px auto 0;
+}
 
-/* Use color-mix for the color gradient styling of the container and box */
-
-/* MAIN STYLING */
 body {
     margin: 5px;
     padding: 5px;
@@ -37,13 +44,6 @@ body {
     background-attachment: fixed;
     background-size: cover;
     color: var(--light);
-    /* background-color: var(--red);
-    display: flex;
-    align-items: center;
-    width: 100vh;
-    height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif; */
 }
 
 nav {
@@ -127,6 +127,7 @@ footer {
     mix-blend-mode: soft-light;
 }
 
+/* Might be used for some input or button elements */
 .pop-in {
     background-color: var(--purple);
     border-radius: 25px;
@@ -135,57 +136,3 @@ footer {
     padding: 20px;
     margin: 20px;
 }
-/* width: 800px;
-    height: 600px;
-    border-radius: 25px;
-    box-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff;
-    margin: 20px; */
-
-/* TEMPORARY. TO BE REMOVED */
-
-/* .color-test .circle-gradient {
-    background: conic-gradient(
-        var(--yellow),
-        var(--pink),
-        var(--red),
-        var(--purple),
-        var(--dark)
-    );
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.yellow {
-    background-color: var(--yellow);
-    width: 100px;
-    height: 100px;
-    border-style: solid solid none;
-}
-.pink {
-    background-color: var(--pink);
-    width: 100px;
-    height: 100px;
-    border-style: none solid;
-}
-.red {
-    background-color: var(--red);
-    width: 100px;
-    height: 100px;
-    border-style: none solid;
-}
-.purple {
-    background-color: var(--purple);
-    width: 100px;
-    height: 100px;
-    border-style: none solid;
-}
-.dark {
-    background-color: var(--dark);
-    width: 100px;
-    height: 100px;
-    border-style: none none solid;
-} */
