@@ -34,6 +34,8 @@ body {
         color-mix(in oklab, var(--yellow), var(--yellow)),
         color-mix(in oklab, var(--yellow), var(--red))
     );
+    background-attachment: fixed;
+    background-size: cover;
     color: var(--light);
     /* background-color: var(--red);
     display: flex;
