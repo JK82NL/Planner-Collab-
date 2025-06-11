@@ -15,10 +15,10 @@
 <body>
 
     <div class="container">
-            <form>
+            <form id="appointmentForm">
                 <div class="row d-flex justify-content-center">
                     <div class="col-7 mt-5">
-                        <input type="text" class="form-control" placeholder="Afspraak naam">
+                        <input type="text" class="form-control" placeholder="Afspraak naam" id="appointmentName">
                     </div>
                 </div>
 
@@ -26,6 +26,7 @@
                     <div class="col-4 mt-4">
                         <label for="startingDate" class="form-label text-center">Datum:</label>
                         <div id="inline-calendar-form"></div>
+                        <input type="hidden" id="startingDate" name="startingDate" required />
                     </div>
                     <div class="col-2 mt-4">
                         <label for="startingTime" class="form-label">Tijd:</label>
@@ -41,7 +42,7 @@
                 </div>
 
                 <div class="col-9 mt-3 text-end">
-                    <button type="submit" class="btn btn-secondary" id="sendDataButton">Opslaan</button>
+                    <button type="button" class="btn btn-secondary" id="sendDataButton">Opslaan</button>
                 </div>
             </form>
                 
@@ -51,7 +52,7 @@
     <!-- Calendar script Flatpickr -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-    <script>
+   <script>
         flatpickr("#inline-calendar-form", {
             inline: true,
             dateFormat: "d-m-Y",
@@ -61,5 +62,6 @@
             }
         });
     </script>
+    <script src="../javascript/index.js"></script>
 
 </body>
