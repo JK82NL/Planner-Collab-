@@ -1,62 +1,97 @@
-
-let dateEl = document.getElementById("startingDate");
+let idEl = document.getElementById("appointmentName");
+let dateEl = document.getElementById("startingDate"); // <-- Verborgen input
 let timeEl = document.getElementById("startingTime");
 let descriptionEl = document.getElementById("description");
+const saveAppointmentBtn = document.getElementById("sendDataButton");
 
-let appointments = JSON.parse(localStorage.getItem('appointments')) || [];// Initialize appointments from localStorage or an empty array
+let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+let calendarInstance = null; // <-- We slaan de Flatpickr instantie op
+
+saveAppointmentBtn.addEventListener("click", saveAppointment);
+
+initCalendar();
 
 function saveAppointments() {
-  localStorage.setItem('appointments', JSON.stringify(appointments)); // Save the appointments array to localStorage
+  localStorage.setItem('appointments', JSON.stringify(appointments));
 }
 
-function showAppointments() {
-  const appointmentsListEl = document.getElementById('appointmentList');// Get the list element where appointments will be displayed  
-  appointmentsListEl.innerHTML = ''; // Clear the list before displaying new appointments
-  appointments.forEach((appointment, index) => { // Loop through each appointment and create a list item
-    if (!appointment.date || !appointment.startTime || !appointment.description) return; // Skip if any required field is empty
-    const item = document.createElement('li'); // Create a new list item element
-// Set the inner HTML of the list item with appointment details and buttons for actions
-    item.innerHTML = `
-      ${appointment.date} ${appointment.startTime} <br>
-      ${appointment.description} <br>
-      <button onclick="delAppointment(${index})">Delete</button>
-      <button onclick="changeAppointment(${index})">Change</button>
-    `;
-    appointmentsListEl.appendChild(item);
+function getFormattedDate(dateObj) {
+  return dateObj.toISOString().split('T')[0];
+}
+
+function initCalendar() {
+  // Vernietig oude instantie als die bestaat
+  if (calendarInstance) {
+    calendarInstance.destroy();
+  }
+
+  calendarInstance = flatpickr("#inline-calendar-form", {
+    inline: true,
+    dateFormat: "d-m-Y",
+    minDate: "today",
+    onChange: function (selectedDates, dateStr) {
+      if (selectedDates.length > 0) {
+        // Zet geselecteerde datum in verborgen input
+        const isoDate = selectedDates[0].toISOString().split('T')[0]; // 'YYYY-MM-DD'
+        document.getElementById("startingDate").value = isoDate;
+      }
+    },
+    onDayCreate: function (dObj, dStr, fp, dayElem) {
+      const date = getFormattedDate(dayElem.dateObj);
+
+      const hasAppointment = appointments.some(appt => {
+        const parts = appt.date.split('-');
+        const apptDate = new Date(parts[2], parts[1] - 1, parts[0]);
+        return getFormattedDate(apptDate) === date;
+      });
+
+      if (hasAppointment) {
+        const dot = document.createElement('span');
+        dot.className = 'dot-indicator';
+        dayElem.appendChild(dot);
+      }
+    }
   });
 }
 
-function saveAppointment(){
-    document.getElementById('appointmentForm').addEventListener('submit', function (e) {
-  e.preventDefault();// Prevent the default form submission behavior
-
-  const appointment = {// Create a new appointment object with values from the form
-    id: Date.now().toString(),
+function saveAppointment() {
+  const appointment = {
+    id: idEl.value,
     date: dateEl.value,
     startTime: timeEl.value,
     description: descriptionEl.value
   };
 
-  appointments.push(appointment);// Add the new appointment to the afspraken array
-  saveAppointments();// Save the updated afspraken array to localStorage
-  showAppointments(); // Display the updated list of appointments
-  this.reset(); // Reset the form fields after submission
-});
+  if (!appointment.date || !appointment.startTime || !appointment.description || !appointment.id) {
+    alert("Vul alle velden in.");
+    return;
+  }
+
+  appointments.push(appointment);
+  saveAppointments();
+  initCalendar(); // herinitialiseer om stip toe te voegen
+
+  // Reset formulier
+  idEl.value = '';
+  dateEl.value = '';
+  timeEl.value = '';
+  descriptionEl.value = '';
 }
 
 function delAppointment(index) {
-  appointments.splice(index, 1); // Remove the appointment from the appointments array
-  saveAppointments();
-  showAppointments();
-}
-
-function changeAppointment(index) {// Function to load an appointment into the form for editing
-  const appointment = appointments[index]; // Get the appointment object from the appointments array
-  dateEl.value = appointment.date; // Load the appointment date
-  timeEl.value = appointment.startTime; // Load the appointment start time
-  descriptionEl.value = appointment.description; // Load the appointment description
-  // Remove the appointment from the list after loading it into the form
   appointments.splice(index, 1);
   saveAppointments();
-  showAppointments();
+  initCalendar();
+}
+
+function changeAppointment(index) {
+  const appointment = appointments[index];
+  idEl.value = appointment.id;
+  dateEl.value = appointment.date;
+  timeEl.value = appointment.startTime;
+  descriptionEl.value = appointment.description;
+
+  appointments.splice(index, 1);
+  saveAppointments();
+  initCalendar();
 }
