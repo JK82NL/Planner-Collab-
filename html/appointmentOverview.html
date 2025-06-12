@@ -9,6 +9,28 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="UTF-8">
+
+    <style>
+        #timeTable .timeSlot {
+            position: absolute;
+            width: 100%;
+            border-bottom: 1px solid #ccc;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .appointment-card {
+            position: absolute;
+            width: 100%;
+            background-color: #cce5ff;
+            border-left: 4px solid #004085;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+    </style>
     
 </head>
 
@@ -23,9 +45,16 @@
         </div>
         
         <div class="row d-flex justify-content-start">
-            <div class="col-11 mt-5 overflow-auto" id="tableMain" style="height: 650px;">
+            <div class="row overflow-auto" style="height: 650px;">
+                <div class="col-2 border-end">
+                    <div id="timeTable" class="position-relative" style="height: 1440px;"></div>
+                </div>
+            
+                <div class="col-9">
+                    <div id="appointmentGrid" class="position-relative" style="height: 1440px;"></div>
+                </div>
 
-            </div>
+                </div>
         </div>
 
         <!-- <div class="card" style="width: 18rem;">
@@ -61,102 +90,92 @@
 
         ];
 
-
-        let timestamps = [];
-
-        generateTimestamps();
-
-        function generateTimestamps() {
-            let interval = 30;
-            let minutesInDay = 24 * 60;
-
-
-            for(let minutes = 0; minutes < minutesInDay; minutes += interval) {
-                const hours = Math.floor(minutes / 60);
-                const mins = minutes % 60;
-
-                // Formatting the time
-
-                const formattedTime = `${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}`;
-                timestamps.push(formattedTime);
-            };
-            //console.log(timestamps);
-        } 
-
-        generateTimeTable();
-
         function generateTimeTable() {
-            let table = document.createElement("table");
-            table.className = "table";
+            const container = document.getElementById('timeTable');
 
-            table.innerHTML = `
-                <thead>
-                    <tr>
-                        <th scope="col">Time:</th>
-                    </tr>
-                </thead>
-            `;
-            document.getElementById("tableMain").appendChild(table);
+            // Loop for 48 time slots for the 48 half hours in one day.
+            for (let i = 0; i < 24 * 2; i++) {
+                const time = document.createElement("div");
+                const hour = Math.floor(i / 2); // Every two iterations of half an hour is a full hour
+                let minutes;
 
-            loopTimestamps(table);
- 
-        }
-
-        function loopTimestamps(table) {
-            let timeTable = document.createElement("tbody");
-
-            timestamps.forEach(function(incTime, index) {
-                let row = document.createElement("tr");
-
-                let timeCell = document.createElement("th");
-                timeCell.scope = "row";
-                timeCell.innerText = incTime;
-                row.appendChild(timeCell);
-
-                let contentCell = document.createElement("td");
-
-                let matchAppointment = apptArray.find(appt => appt.apptStart === incTime);
-
-                if(matchAppointment) {
-                    let duration = calculateDurationMins(matchAppointment.apptStart, matchAppointment.apptEnd);
-                    let rowToSpan = duration / 30;
-
-                    contentCell.rowSpan = rowToSpan;
-
-                    contentCell.innerHTML = `
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h6 class="card-title">${matchAppointment.apptTitle}</h6>
-                                <p class="card-text h6">${matchAppointment.apptDesc}</p>
-                            </div>
-                        </div>
-                    `;
-
-                    row.appendChild(contentCell);
-
+                if (i % 2 === 0) {
+                    minutes = '00';
                 } else {
-                    let isCovered = apptArray.some(appt => {
-                        let startIndex = timestamps.indexOf(appt.apptStart);
-                        let endIndex = timestamps.indexOf(appt.apptEnd);
-                        return index > startIndex && index < endIndex;
-                    });
-
-                    if (!isCovered) {
-                        row.appendChild(contentCell);
-                    }
+                    minutes = '30';
                 }
 
-                timeTable.appendChild(row);
-            });
-            table.appendChild(timeTable);
+                time.className = 'timeSlot';
+                time.innerText = `${String(hour).padStart(2, '0')}:${minutes}`; // Stringify hour to use padstart adding a 0 at the start.
+                time.style.top = `${i * 30}px`; // Per slot giving 30 pixels space
+                time.style.height = '30px';
+                container.appendChild(time);
+            }
         }
 
-        function calculateDurationMins(start, end) {
-            let [startHour, startMin] = start.split(':').map(Number);
-            let [endHour, endMin] = end.split(':').map(Number);
-            console.log((endHour * 60 + endMin) - (startHour * 60 + startMin));
-            return (endHour * 60 + endMin) - (startHour * 60 + startMin);
+        function generateAppointments() {
+            const container = document.getElementById('appointmentGrid');
+
+            apptArray.forEach(appt => {
+                const card = document.createElement("div");
+
+                card.className = 'appointment-card';
+                card.innerHTML = `
+                <strong>${appt.apptTitle}</strong><br/>
+                <small>${appt.apptDesc}</small>
+                `;
+
+                const startMin = timeToMinutes(appt.apptStart);
+                const endMin = timeToMinutes(appt.apptEnd);
+                const duration = endMin - startMin;
+
+                card.style.top = `${startMin}px`;
+                card.style.height = `${duration}px`;
+
+                container.appendChild(card);
+
+
+                // card.classList = 'card appointment-card';
+                // card.innerHTML = `
+                //     <div class="card-body">
+                //         <h6 class="card-title mb-1">${appt.apptTitle}</h6>
+                //         <p class="card-text h6">${appt.apptDesc}</p>
+                //     </div>
+                // `;
+
+                // const slotHeight = 30;
+                // const startIndex = getSlotIndex(appt.apptStart);
+                // const endIndex = getSlotIndex(appt.apptEnd);
+
+                // card.style.top = `${startIndex * slotHeight}px`;
+                // card.style.height = `${(endIndex - startIndex) * slotHeight}px`;
+                
+                // container.appendChild(card);
+            });
+
+    
         }
+
+        function timeToMinutes(timeString) {
+            const [hour, minute] = timeString.split(':').map(Number);
+            return hour * 60 + minute;
+        }
+
+        // function getSlotIndex(timeString) {
+        //     const [hour, minute] = timeString.split(':').map(Number);
+        //     // Each slot is 30 mins
+        //     let offset = 0;
+        //     // Checks if minute is a full hour 00 or half hour 30, if it is half an hour, add offset for timeslot.
+        //     if(minute === 30) {
+        //             offset = 1;
+        //     }
+
+        //     return hour * 2 + offset;
+        // }
+
+        generateTimeTable();
+        generateAppointments();
+        
 
     </script>
 
