@@ -44,36 +44,48 @@ body {
     );
     background-attachment: fixed;
     background-size: cover;
-    color: var(--light);
 }
 
-nav {
-    position: relative;
-    color: var(--light);
-    margin-bottom: -20px;
-}
-
+/* Brand & Copyright texts */
 .brandname {
-    font-size: 24px;
+    color: color-mix(in oklab, var(--yellow), var(--red));
+    font-size: 32px;
+}
+
+.footername {
+    color: color-mix(in oklab, var(--yellow), var(--purple));
+    font-size: 16px;
+}
+
+/* !!! UGLY !!! NEEDS BETTER STYILING */
+.footertext {
+    color: color-mix(in oklab, var(--yellow), var(--purple));
+    font-size: 12px;
+}
+
+/* Navigation Bar */
+.nav-text {
+    color: var(--purple);
+    font-weight: 900;
+    font-size: 12px;
+    /* --light: rgb(255, 255, 255);
+    --yellow: rgb(240, 179, 111);
+    --pink: rgb(225, 116, 128);
+    --red: rgb(212, 75, 121);
+    --purple: rgb(107, 51, 94);
+    --dark: rgb(63, 23, 52); */
+}
+
+.nav-spacer {
+    color: color-mix(in oklab, var(--yellow), var(--pink));
+    font-size: 16px;
 }
 
 a {
-    position: relative;
-    color: var(--yellow);
     text-decoration: none;
-}
-
-a.link {
-    color: var(--light);
-    text-decoration: none;
-}
-
-a.link:hover {
-    color: var(-pink);
 }
 
 a span {
-    color: var(--yellow);
     font-weight: 900;
 }
 
@@ -83,27 +95,54 @@ img.logo {
     height: 80px;
 }
 
-.information-container {
-    padding-top: 30px;
-    padding-bottom: 10px;
-    text-align: center;
+/* Display options for Calendar */
+
+#monthDisplay {
+    display: block;
+    visibility: visible;
 }
 
-.calendar-container {
-    width: 100%;
-    height: 100%;
+#fullscreenDisplay {
+    display: block;
+    visibility: hidden;
 }
 
-.calendar {
-    padding: 25px;
+#weekDisplay {
+    display: block;
+    visibility: hidden;
+}
+
+#dayDisplay {
+    display: block;
+    visibility: hidden;
+}
+
+#appointmentDisplay {
+    display: block;
+    visibility: hidden;
+}
+
+/* Calendar */
+
+/* Adjust spacing so the scaled calendar doesn't overflow */
+#inline-calendar-home {
+    overflow: visible;
+    width: fit-content;
+}
+
+/* Scaled calendar to be bigger, added in style so it only affects this calendar not the standard calendar in the form. */
+.homepage-body .flatpickr-calendar {
+    transform: scale(1.8);
+    transform-origin: center;
 }
 
 footer {
     position: relative;
-    color: var(--light);
 }
 
-.shadow {
+/* Keeping if needed. !!! DELETE B4 FINISHED PRODUCT !!! */
+
+/* .shadow {
     position: relative;
     background: linear-gradient(
         145deg,
@@ -128,7 +167,6 @@ footer {
     mix-blend-mode: soft-light;
 }
 
-/* Might be used for some input or button elements */
 .pop-in {
     background-color: var(--purple);
     border-radius: 25px;
@@ -136,4 +174,4 @@ footer {
         inset -5px -5px 10px color-mix(in oklab, black, currentColor);
     padding: 20px;
     margin: 20px;
-}
+} */
