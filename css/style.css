@@ -20,7 +20,8 @@
     font-style: Nunito Sans Italic;
     src: url(NunitoSans-VariableFont_YTLCopszwdthwght.ttf);
 }
-/* Dot indicates appointments on that specific day in the calendar */
+
+/* Dot showing when there are appointments on that specific day in the calendar */
 .dot-indicator {
     display: block;
     width: 6px;
