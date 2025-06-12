@@ -28,6 +28,7 @@
             border-radius: 0.25rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             overflow: hidden;
+            z-index: 2;
         }
 
     </style>
@@ -45,7 +46,7 @@
         </div>
         
         <div class="row d-flex justify-content-start">
-            <div class="row overflow-auto" style="height: 650px;">
+            <div class="row overflow-auto" style="height: 550px;">
                 <div class="col-2 border-end">
                     <div id="timeTable" class="position-relative" style="height: 1440px;"></div>
                 </div>
@@ -56,13 +57,6 @@
 
                 </div>
         </div>
-
-        <!-- <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="class-title">Afspraak 1</h5>
-                <p class="card-text">Lunch afspraak</p>
-            </div>
-        </div> -->
 
     </div>
 
@@ -115,6 +109,7 @@
 
         function generateAppointments() {
             const container = document.getElementById('appointmentGrid');
+            const placedAppt = []; // Keeps track of which appointments are placed
 
             apptArray.forEach(appt => {
                 const card = document.createElement("div");
@@ -129,31 +124,34 @@
                 const endMin = timeToMinutes(appt.apptEnd);
                 const duration = endMin - startMin;
 
+                let leftOffset = 0;     // The index/position of the card being on the left side
+                let overlapCount = 1;   // Keep track of how many appointments are overlapping
+
+                placedAppt.forEach(placed => {
+                    const placedStart = timeToMinutes(placed.apptStart);
+                    const placedEnd = timeToMinutes(placed.apptEnd);
+
+                    if (startMin < placedEnd && endMin > placedStart) {
+                        leftOffset += 1;
+                        overlapCount += 1;
+                    }
+                });
+
+                // Starting position of the card
                 card.style.top = `${startMin}px`;
+                // How long the card will be
                 card.style.height = `${duration}px`;
 
-                container.appendChild(card);
+                // Giving correct position for each card, width of 100 divided by how many appointments overlap. 
+                card.style.left = `${leftOffset * (100 / overlapCount)}%`;
 
-
-                // card.classList = 'card appointment-card';
-                // card.innerHTML = `
-                //     <div class="card-body">
-                //         <h6 class="card-title mb-1">${appt.apptTitle}</h6>
-                //         <p class="card-text h6">${appt.apptDesc}</p>
-                //     </div>
-                // `;
-
-                // const slotHeight = 30;
-                // const startIndex = getSlotIndex(appt.apptStart);
-                // const endIndex = getSlotIndex(appt.apptEnd);
-
-                // card.style.top = `${startIndex * slotHeight}px`;
-                // card.style.height = `${(endIndex - startIndex) * slotHeight}px`;
+                // Giving the right width for each card, width of 100 divided by how many appointments overlap to give the width to the card.
+                card.style.width = `${100 / overlapCount}%`;
                 
-                // container.appendChild(card);
-            });
+                container.appendChild(card);
+                placedAppt.push(appt);
 
-    
+            });
         }
 
         function timeToMinutes(timeString) {
@@ -161,21 +159,8 @@
             return hour * 60 + minute;
         }
 
-        // function getSlotIndex(timeString) {
-        //     const [hour, minute] = timeString.split(':').map(Number);
-        //     // Each slot is 30 mins
-        //     let offset = 0;
-        //     // Checks if minute is a full hour 00 or half hour 30, if it is half an hour, add offset for timeslot.
-        //     if(minute === 30) {
-        //             offset = 1;
-        //     }
-
-        //     return hour * 2 + offset;
-        // }
-
         generateTimeTable();
         generateAppointments();
-        
 
     </script>
 
