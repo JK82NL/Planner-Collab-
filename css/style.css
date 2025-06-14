@@ -14,12 +14,12 @@
 }
 
 /* Loads custom font */
-@font-face {
+/*@font-face {
     font-family: Nunito Sans;
     src: url(NunitoSans-Italic-VariableFont_YTLCopszwdthwght.ttf);
     font-style: Nunito Sans Italic;
     src: url(NunitoSans-VariableFont_YTLCopszwdthwght.ttf);
-}
+}*/
 
 /* Dot showing when there are appointments on that specific day in the calendar */
 .dot-indicator {
