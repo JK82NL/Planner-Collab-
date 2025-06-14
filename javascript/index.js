@@ -1,6 +1,7 @@
 let idEl = document.getElementById("appointmentName");
 let dateEl = document.getElementById("startingDate"); // <-- Verborgen input
 let timeEl = document.getElementById("startingTime");
+let endTimeEl = document.getElementById("endingTime");
 let descriptionEl = document.getElementById("description");
 const saveAppointmentBtn = document.getElementById("sendDataButton");
 
@@ -33,7 +34,8 @@ function initCalendar() {
       if (selectedDates.length > 0) {
         // Zet geselecteerde datum in verborgen input
         const isoDate = selectedDates[0].toISOString().split('T')[0]; // 'YYYY-MM-DD'
-        document.getElementById("startingDate").value = isoDate;
+        document.getElementById("startingDate").value = isoDate; // Bugged? returns the day before selected?
+        document.getElementById("startingDate").value = dateStr; // Returns correct date, 'dd-mm-YY' <- worse formatting tho
       }
     },
     onDayCreate: function (dObj, dStr, fp, dayElem) {
@@ -59,10 +61,11 @@ function saveAppointment() {
     id: idEl.value,
     date: dateEl.value,
     startTime: timeEl.value,
+    endTime: endTimeEl.value,
     description: descriptionEl.value
   };
 
-  if (!appointment.date || !appointment.startTime || !appointment.description || !appointment.id) {
+  if (!appointment.date || !appointment.startTime || !appointment.endTime || !appointment.description || !appointment.id) {
     alert("Vul alle velden in.");
     return;
   }
@@ -75,6 +78,7 @@ function saveAppointment() {
   idEl.value = '';
   dateEl.value = '';
   timeEl.value = '';
+  endTimeEl.value = '';
   descriptionEl.value = '';
 }
 
@@ -89,6 +93,7 @@ function changeAppointment(index) {
   idEl.value = appointment.id;
   dateEl.value = appointment.date;
   timeEl.value = appointment.startTime;
+  endTimeEl.value = appointment.endTime;
   descriptionEl.value = appointment.description;
 
   appointments.splice(index, 1);
