@@ -12,6 +12,28 @@ saveAppointmentBtn.addEventListener("click", saveAppointment);
 
 initCalendar();
 
+let edit = false;
+let value = null;
+
+function checkEdit() {
+  const params = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+  });
+  value = params.edit;
+
+  if(value !== null) {
+    edit = true;
+    idEl.value = appointments[value].id;
+    dateEl.value = appointments[value].date; // Need to set up flatpickr
+    timeEl.value = appointments[value].startTime;
+    endTimeEl.value = appointments[value].endTime;
+    descriptionEl.value = appointments[value].description;
+    calendarInstance.setDate(appointments[value].date);
+  };
+}
+
+checkEdit();
+
 function saveAppointments() {
   localStorage.setItem('appointments', JSON.stringify(appointments));
 }
@@ -70,16 +92,23 @@ function saveAppointment() {
     return;
   }
 
-  appointments.push(appointment);
-  saveAppointments();
-  initCalendar(); // herinitialiseer om stip toe te voegen
+  if(!edit) {
+    appointments.push(appointment);
+    saveAppointments();
+    initCalendar(); // herinitialiseer om stip toe te voegen
 
-  // Reset formulier
-  idEl.value = '';
-  dateEl.value = '';
-  timeEl.value = '';
-  endTimeEl.value = '';
-  descriptionEl.value = '';
+    // Reset formulier
+    idEl.value = '';
+    dateEl.value = '';
+    timeEl.value = '';
+    endTimeEl.value = '';
+    descriptionEl.value = '';
+  } else {
+    appointments[value] = appointment;
+    saveAppointments();
+    window.location.href=`./appointmentOverview.html?date=${appointment.date}`; // need to load to the correct date
+  }
+
 }
 
 function delAppointment(index) {

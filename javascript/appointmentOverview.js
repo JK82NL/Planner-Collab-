@@ -1,7 +1,26 @@
-const pageDate = document.getElementById('date').getAttribute('date');
+let pageDate = document.getElementById('date').getAttribute('date');
 let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
 let cardLoaded = false;
 let apptArray = [];
+
+// Loading the date
+let value = null;
+
+function checkEdit() {
+  const params = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+  });
+  value = params.date;
+
+  if(value !== null) {
+    // const pageDate = document.getElementById('date').getAttribute('date');
+    pageDate = value;
+    document.getElementById('date').innerHTML = value;
+    console.log("test")
+  };
+}
+
+checkEdit();
 
 function generateApptArray() {
   // Load the array, based off the page date.
@@ -14,28 +33,6 @@ function generateApptArray() {
 
 generateApptArray()
 
-// const apptArray = [
-//   {
-//     apptTitle: appointments[0].id,
-//     apptDate: appointments[0].date,
-//     apptDesc: appointments[0].description,
-//     apptStart: appointments[0].startTime, 
-//     apptEnd: appointments[0].endTime,
-//   },
-//   {
-//     apptTitle: "Tandarts",
-//     apptDesc: "Jaarlijkse check-up",
-//     apptStart: "14:00",
-//     apptEnd: "14:30",
-//   },
-//   {
-//     apptTitle: "Pauze",
-//     apptDesc: "Vrije tijd",
-//     apptStart: "10:30",
-//     apptEnd: "12:30",
-//   },
-// ];
-
 function saveAppointments() {
   localStorage.setItem('appointments', JSON.stringify(appointments));
 }
@@ -44,7 +41,6 @@ function delAppointment(index) {
   appointments.splice(index, 1);
   saveAppointments();
 }
-
 
 function loadCard(card) {
 
@@ -94,10 +90,12 @@ function loadCard(card) {
       saveAppointments();
       generateAppointments()}); // Reload Appointments
 
-    editBtn.addEventListener('click', function() {alert("Link to edit page")});
+    editBtn.addEventListener('click', function() {
+      window.location.href=`./createForm.html?edit=${card.id}`; // Load appointment create with the edit value
+    });
 
     cardLoaded = true;
-  }
+  };
 }
 
 function generateTimeTable() {
