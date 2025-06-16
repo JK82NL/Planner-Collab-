@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box;
-    /* border: 1px solid gray; */
 }
 
 /* color variables */
@@ -52,15 +51,14 @@ body {
     font-size: 32px;
 }
 
-.footername {
+footer {
+    position: relative;
     color: color-mix(in oklab, var(--yellow), var(--purple));
     font-size: 16px;
 }
 
-/* !!! UGLY !!! NEEDS BETTER STYILING */
-.footertext {
+.footername {
     color: color-mix(in oklab, var(--yellow), var(--purple));
-    font-size: 12px;
 }
 
 /* Navigation Bar */
@@ -68,12 +66,6 @@ body {
     color: var(--purple);
     font-weight: 900;
     font-size: 12px;
-    /* --light: rgb(255, 255, 255);
-    --yellow: rgb(240, 179, 111);
-    --pink: rgb(225, 116, 128);
-    --red: rgb(212, 75, 121);
-    --purple: rgb(107, 51, 94);
-    --dark: rgb(63, 23, 52); */
 }
 
 .nav-spacer {
@@ -90,36 +82,30 @@ a span {
 }
 
 img.logo {
-    flex-shrink: 1;
     width: 80px;
     height: 80px;
 }
 
 /* Display options for Calendar */
 
-#monthDisplay {
-    display: block;
-    visibility: visible;
+#monthPage {
+    display: none;
+}
+
+#weekPage {
+    display: none;
+}
+
+#dayPage {
+    display: none;
+}
+
+.appointmentPage {
+    display: none;
 }
 
 #fullscreenOverlay {
-    display: block;
-    visibility: hidden;
-}
-
-#weekDisplay {
-    display: block;
-    visibility: hidden;
-}
-
-#dayDisplay {
-    display: block;
-    visibility: hidden;
-}
-
-#appointmentDisplay {
-    display: block;
-    visibility: hidden;
+    display: none;
 }
 
 /* Calendar */
@@ -132,12 +118,30 @@ img.logo {
 
 /* Scaled calendar to be bigger, added in style so it only affects this calendar not the standard calendar in the form. */
 .homepage-body .flatpickr-calendar {
-    transform: scale(1.8);
+    transform: scale(1.5);
     transform-origin: center;
 }
 
-footer {
-    position: relative;
+/* Appointment Page */
+
+#timeTable .timeSlot {
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.appointment-card {
+    position: absolute;
+    width: 100%;
+    background-color: #cce5ff;
+    border-left: 4px solid #004085;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    z-index: 2;
 }
 
 /* Keeping if needed. !!! DELETE B4 FINISHED PRODUCT !!! */

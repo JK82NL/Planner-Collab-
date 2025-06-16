@@ -1,49 +1,57 @@
-function switchPage() {
-    const appointmentPage = document.getElementById("appointmentPage");
-    const monthPage = document.getElementById("monthPage");
-    const weekPage = document.getElementById("weekPage");
-    const dayPage = document.getElementById("dayPage");
-    const fullscreenOverlay = document.getElementById("fullscreenOverlay");
 
-    let displayPage = [appointmentPage, monthPage, weekPage, dayPage, fullscreenOverlay];
+document.addEventListener('DOMContentLoaded', function () {
+    // Put pages into variables
+    const appointmentPage = document.getElementById('appointmentPage');
+    const monthPage = document.getElementById('monthPage');
+    const weekPage = document.getElementById('weekPage');
+    const dayPage = document.getElementById('dayPage');
+    const fullscreenOverlay = document.getElementById('fullscreenOverlay');
 
-    for (let i = 0; i < displayPage.length; i++) {
-        // Check if the page is already displayed
-        if (window.getComputedStyle(displayPage[i]).display !== "none") {
-            page.style.display = "none";
-        } else {
-            page.style.display = "block";
-            break; // Stop after displaying the first page
-        }
+    // Set initial states
+    appointmentPage.style.display = "none";
+    weekPage.style.display = "none";
+    dayPage.style.display = "none";
+    fullscreenOverlay.style.display = "none";
+    monthPage.style.display = "block"; // Show month page by default
+});
+
+// Switch page with buttonclick.
+function switchPage(targetPage) {
+    // DEBUG LOG
+    console.log('switchPage called with:', targetPage);
+
+    // DEBUG LOG to check if elements are found
+    console.log('Elements found:', {
+        appointmentPage,
+        monthPage,
+        weekPage,
+        dayPage,
+        fullscreenOverlay
+    });
+
+    // Put page variables into an array and them all.
+    const pages = [appointmentPage, monthPage, weekPage, dayPage, fullscreenOverlay];
+    pages.forEach(page => page.style.display = "none");
+
+    // Show the target page based on button clicked
+    switch (targetPage) {
+        case 'appointmentPage':
+            appointmentPage.style.display = "block";
+            break;
+        case 'monthPage':
+            monthPage.style.display = "block";
+            break;
+        case 'weekPage':
+            weekPage.style.display = "block";
+            break;
+        case 'dayPage':
+            dayPage.style.display = "block";
+            break;
+        case 'fullscreenOverlay':
+            fullscreenOverlay.style.display = "block";
+            break;
+        default:
+            monthPage.style.display = "block"; // Default to month view
+            console.log('Unknown page:', targetPage);
     }
 }
-
-// !!! CHANGE CODE TO NOT ROTATE BUT ONLY TO SHOW THE CLICKED DISPLAY PAGE !!!
-
-
-
-// // Check the display property of each page and switch accordingly
-// // !== "none" checks for all possible display options not just "block" like with === "block"
-// if (window.getComputedStyle(appointmentPage).display !== "none") {
-//     appointmentPage.style.display = "none";
-//     page.style.display = "block";
-// }   // ^^^ Check if appointmentPage is displayed ^^^
-// else if (window.getComputedStyle(monthPage).display !== "none") {
-//     monthPage.style.display = "none";
-//     page.style.display = "block";
-// }   // ^^^ Check if monthPage is displayed ^^^
-// else if (window.getComputedStyle(weekPage).display !== "none") {
-//     weekPage.style.display = "none";
-//     page.style.display = "block";
-// }   // ^^^ Check if weekPage is displayed ^^^
-// else if (window.getComputedStyle(dayPage).display !== "none") {
-//     dayPage.style.display = "none";
-//     page.style.display = "block";
-// }   // ^^^ Check if dayPage is displayed ^^^
-// else if (window.getComputedStyle(fullscreenOverlay).display !== "none") {
-//     fullscreenOverlay.style.display = "none";
-//     page.style.display = "block";
-// }   // ^^^ Check if fullscreenOverlay is displayed ^^^
-// else {
-//     errorMessage.style.display = "block";
-// }   // ^^^ If no pages are displayed, show error message ^^^
