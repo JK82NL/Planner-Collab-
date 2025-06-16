@@ -102,7 +102,7 @@ img.logo {
     visibility: visible;
 }
 
-#fullscreenDisplay {
+#fullscreenOverlay {
     display: block;
     visibility: hidden;
 }
