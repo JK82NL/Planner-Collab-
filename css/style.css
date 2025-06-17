@@ -20,16 +20,6 @@
     src: url(NunitoSans-VariableFont_YTLCopszwdthwght.ttf);
 }*/
 
-/* Dot showing when there are appointments on that specific day in the calendar */
-.dot-indicator {
-    display: block;
-    width: 6px;
-    height: 6px;
-    background-color: red;
-    border-radius: 50%;
-    margin: 2px auto 0;
-}
-
 body {
     margin: 5px;
     padding: 5px;
@@ -45,23 +35,18 @@ body {
     background-size: cover;
 }
 
-/* Brand & Copyright texts */
+/* Navigation Bar */
+
+img.logo {
+    width: 60px;
+    height: 60px;
+}
+
 .brandname {
     color: color-mix(in oklab, var(--yellow), var(--red));
     font-size: 32px;
 }
 
-footer {
-    position: relative;
-    color: color-mix(in oklab, var(--yellow), var(--purple));
-    font-size: 16px;
-}
-
-.footername {
-    color: color-mix(in oklab, var(--yellow), var(--purple));
-}
-
-/* Navigation Bar */
 .nav-text {
     color: var(--purple);
     font-weight: 900;
@@ -81,34 +66,16 @@ a span {
     font-weight: 900;
 }
 
-img.logo {
-    width: 80px;
-    height: 80px;
-}
-
 /* Display options for Calendar */
-
-#monthPage {
-    display: none;
-}
-
-#weekPage {
-    display: none;
-}
-
-#dayPage {
-    display: none;
-}
-
-.appointmentPage {
-    display: none;
-}
 
 #fullscreenOverlay {
     display: none;
 }
 
-/* Calendar */
+/* MONTH PAGE | MAIN CALENDAR */
+#monthPage {
+    display: none;
+}
 
 /* Adjust spacing so the scaled calendar doesn't overflow */
 #inline-calendar-home {
@@ -122,7 +89,21 @@ img.logo {
     transform-origin: center;
 }
 
-/* Appointment Page */
+/* Dot showing when there are appointments on that specific day in the calendar */
+.dot-indicator {
+    display: block;
+    width: 6px;
+    height: 6px;
+    background-color: red;
+    border-radius: 50%;
+    margin: 2px auto 0;
+}
+
+/* APPOINTMENT PAGE */
+
+.appointmentPage {
+    display: none;
+}
 
 #timeTable .timeSlot {
     position: absolute;
@@ -142,6 +123,46 @@ img.logo {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     z-index: 2;
+}
+
+/* WEEK VIEW PAGE */
+#weekPage {
+    display: none;
+}
+
+/* DAY VIEW PAGE */
+#dayPage {
+    display: none;
+}
+
+#test-container {
+    width: 100vw;
+    height: 100vh;
+}
+
+.time-table {
+    height: 550px;
+}
+
+#timeTable {
+    height: 1440px;
+}
+
+#appointmentgrid {
+    height: 1440px;
+}
+
+/* Footer with Brandname & Copyright text */
+
+footer {
+    position: fixed;
+    bottom: 0;
+    color: color-mix(in oklab, var(--yellow), var(--purple));
+    font-size: 16px;
+}
+
+.footername {
+    color: color-mix(in oklab, var(--yellow), var(--purple));
 }
 
 /* Keeping if needed. !!! DELETE B4 FINISHED PRODUCT !!! */

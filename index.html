@@ -19,201 +19,268 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
         />
-        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="stylesheet" href="css/style.css" />
     </head>
 
     <body>
         <!-- Navigation bar -->
-        <div class="container">
-            <nav class="navbar navbar-expand-lg">
-                <div class="container-fluid">
-                    <a class="brandname" href="index.html"
-                        ><img
-                            class="d-inline-block logo"
-                            src="favicon\android-chrome-192x192.png"
-                            alt="Hack&SlashLab Logo"
-                        /><span class="ps-3">Hack&Slash</span>Lab
-                    </a>
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <span class="nav-spacer m-3">|</span>
-                            </li>
-                            <li class="nav-item">
-                                <a
-                                    class="nav-text"
-                                    href="#"
-                                    onclick="switchPage('appointmentPage')"
-                                    ><i class="bi bi-calendar-plus">
-                                        - Toevoegen</i
-                                    >
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <span class="nav-spacer m-3">|</span>
-                            </li>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-center">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="brandname" href="index.html">
+                                <img
+                                    class="d-inline-block logo"
+                                    src="favicon\android-chrome-192x192.png"
+                                    alt="Hack&SlashLab Logo"
+                                />
+                                <span class="ps-3">Hack&Slash</span>Lab
+                            </a>
+                            <button
+                                class="navbar-toggler"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#navbarNav"
+                                aria-controls="navbarNav"
+                                aria-expanded="false"
+                                aria-label="Toggle navigation"
+                            >
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div
+                                class="collapse navbar-collapse"
+                                id="navbarNav"
+                            >
+                                <ul class="navbar-nav">
+                                    <li class="nav-item">
+                                        <span class="nav-spacer m-3">|</span>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-text"
+                                            href="#"
+                                            onclick="switchPage('appointmentPage')"
+                                            ><i class="bi bi-calendar-plus">
+                                                - Toevoegen</i
+                                            >
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <span class="nav-spacer m-3">|</span>
+                                    </li>
 
-                            <li class="nav-item">
-                                <a
-                                    class="nav-text"
-                                    href="#"
-                                    onclick="switchPage('fullscreenOverlay')"
-                                    ><i class="bi bi-arrows-fullscreen">
-                                        - Fullscreen</i
-                                    ></a
-                                >
-                            </li>
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-text"
+                                            href="#"
+                                            onclick="switchPage('fullscreenOverlay')"
+                                            ><i class="bi bi-arrows-fullscreen">
+                                                - Fullscreen</i
+                                            ></a
+                                        >
+                                    </li>
 
-                            <li class="nav-item">
-                                <span class="nav-spacer m-3">|</span>
-                            </li>
+                                    <li class="nav-item">
+                                        <span class="nav-spacer m-3">|</span>
+                                    </li>
 
-                            <li class="nav-item">
-                                <a
-                                    class="nav-text"
-                                    href="#"
-                                    onclick="switchPage('monthPage')"
-                                    ><i class="bi bi-calendar3"> - Maand</i></a
-                                >
-                            </li>
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-text"
+                                            href="#"
+                                            onclick="switchPage('monthPage')"
+                                            ><i class="bi bi-calendar3">
+                                                - Maand</i
+                                            ></a
+                                        >
+                                    </li>
 
-                            <li class="nav-item">
-                                <span class="nav-spacer m-3">|</span>
-                            </li>
+                                    <li class="nav-item">
+                                        <span class="nav-spacer m-3">|</span>
+                                    </li>
 
-                            <li class="nav-item">
-                                <a
-                                    class="nav-text"
-                                    href="#"
-                                    onclick="switchPage('weekPage')"
-                                    ><i class="bi bi-calendar2-minus">
-                                        - Week</i
-                                    ></a
-                                >
-                            </li>
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-text"
+                                            href="#"
+                                            onclick="switchPage('weekPage')"
+                                            ><i class="bi bi-calendar2-minus">
+                                                - Week</i
+                                            ></a
+                                        >
+                                    </li>
 
-                            <li class="nav-item">
-                                <span class="nav-spacer m-3">|</span>
-                            </li>
+                                    <li class="nav-item">
+                                        <span class="nav-spacer m-3">|</span>
+                                    </li>
 
-                            <li class="nav-item">
-                                <a
-                                    class="nav-text"
-                                    href="#"
-                                    onclick="switchPage('dayPage')"
-                                    ><i class="bi bi-calendar4-event">
-                                        - Dag</i
-                                    ></a
-                                >
-                            </li>
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-text"
+                                            href="#"
+                                            onclick="switchPage('dayPage')"
+                                            ><i class="bi bi-calendar4-event">
+                                                - Dag</i
+                                            ></a
+                                        >
+                                    </li>
 
-                            <li class="nav-item">
-                                <span class="nav-spacer m-3">|</span>
-                            </li>
-                        </ul>
+                                    <li class="nav-item">
+                                        <span class="nav-spacer m-3">|</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
                     </div>
                 </div>
-            </nav>
-        </div>
-
-        <!-- Calendar Display  -->
-
-        <!-- Month Display Block -->
-        <div class="container p-5 m-5 homepage-body" id="monthPage">
-            <div class="row d-flex w-100 justify-content-center">
-                <div id="inline-calendar-home"></div>
             </div>
         </div>
 
-        <!-- Appointment Display Block -->
-        <div class="container" id="appointmentPage">
-            <form id="appointmentForm">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-7 mt-5">
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Afspraak naam"
-                            id="appointmentName"
-                        />
-                    </div>
-                </div>
-
-                <div class="row d-flex justify-content-center">
-                    <div class="col-4 mt-4">
-                        <label for="startingDate" class="form-label text-center"
-                            >Datum:</label
-                        >
-                        <div id="inline-calendar-form"></div>
-                        <input
-                            type="hidden"
-                            id="startingDate"
-                            name="startingDate"
-                            required
-                        />
-                    </div>
-                    <div class="col-2 mt-4">
-                        <label for="startingTime" class="form-label"
-                            >Tijd:</label
-                        >
-                        <input
-                            type="time"
-                            class="form-control"
-                            id="startingTime"
-                        />
-                    </div>
-                </div>
-
-                <div class="row d-flex justify-content-center">
-                    <div class="col-6 mt-4">
-                        <label for="description" class="form-label"
-                            >Omschrijving:</label
-                        >
-                        <textarea
-                            class="form-control"
-                            id="description"
-                            rows="4"
-                            style="resize: none"
-                        ></textarea>
-                    </div>
-                </div>
-
-                <div class="col-9 mt-3 text-end">
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        id="sendDataButton"
+        <!-- Starting Divs for containing the info pages -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div
+                        class="d-flex justify-content-center align-items-center"
                     >
-                        Opslaan
-                    </button>
+                        <!-- Calendar Display  -->
+
+                        <!-- Month Display Block -->
+                        <div class="p-5 m-5 homepage-body" id="monthPage">
+                            <div id="inline-calendar-home"></div>
+                        </div>
+
+                        <!-- Create Appointment Block -->
+                        <div class="container" id="appointmentPage">
+                            <form id="appointmentForm">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-7">
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            placeholder="Afspraak naam"
+                                            id="appointmentName"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-4 mt-4">
+                                        <label
+                                            for="startingDate"
+                                            class="form-label text-center"
+                                            >Datum:</label
+                                        >
+                                        <div id="inline-calendar-form"></div>
+                                        <input
+                                            type="hidden"
+                                            id="startingDate"
+                                            name="startingDate"
+                                            required
+                                        />
+                                    </div>
+                                    <div class="col-2 mt-4">
+                                        <label
+                                            for="startingTime"
+                                            class="form-label"
+                                            >Tijd:</label
+                                        >
+                                        <input
+                                            type="time"
+                                            class="form-control"
+                                            id="startingTime"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-6 mt-4">
+                                        <label
+                                            for="description"
+                                            class="form-label"
+                                            >Omschrijving:</label
+                                        >
+                                        <textarea
+                                            class="form-control"
+                                            id="description"
+                                            rows="4"
+                                            style="resize: none"
+                                        ></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-9 mt-3 text-end">
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary"
+                                        id="sendDataButton"
+                                    >
+                                        Opslaan
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="container" id="weekPage">
+                            <h1>Placeholder Week Display</h1>
+                        </div>
+
+                        <!-- Day Page -->
+                        <div class="container" id="dayPage">
+                            <span
+                                class="row position-absolute justify-content-center align-items-center"
+                                id="test-container"
+                            >
+                                <!-- Load popup cards -->
+                            </span>
+
+                            <div class="container">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-6 text-center">
+                                        <!-- Placeholder for current date -->
+                                        <p
+                                            class="h3"
+                                            id="date"
+                                            date="16-06-2025"
+                                        >
+                                            Monday 16th June
+                                        </p>
+                                        <!-- use date attribute for loaded date 'dd-mm-YY' -->
+                                    </div>
+                                </div>
+
+                                <div class="row d-flex justify-content-start">
+                                    <div class="row overflow-auto time-table">
+                                        <div class="col-2 border-end">
+                                            <div
+                                                id="timeTable"
+                                                class="position-relative time-table"
+                                            ></div>
+                                        </div>
+
+                                        <div class="col-9">
+                                            <div
+                                                id="appointmentGrid"
+                                                class="position-relative"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container" id="fullscreenOverlay">
+                            <h1>Placeholder Fullscreen Overlay</h1>
+
+                            <!-- Ending Divs for containing the info pages -->
+                        </div>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
-
-        <div class="container" id="weekPage">
-            <h1>Placeholder Week Display</h1>
-        </div>
-
-        <div class="container" id="dayPage">
-            <h1>Placeholder Day Display</h1>
-        </div>
-
-        <div class="container" id="fullscreenOverlay">
-            <h1>Placeholder Fullscreen Overlay</h1>
-        </div>
-
         <!-- Footer -->
+
         <footer class="container text-center">
             <div class="text-center m-4 footertext">
                 © 2025 Copyright:
@@ -242,9 +309,11 @@
 
         <script src="javascript/index.js"></script>
 
-        <!-- Hides and displays all pages through the navigation buttons -->
         <script src="javascript/appointmentOverview.js"></script>
-        <!-- <script src="javascript/homeJS.js"></script> -->
+
+        <script src="javascript/appointmentOverview.js"></script>
+        <script src="javascript/homeJS.js"></script>
+        <!-- Hides and displays all pages through the navigation buttons -->
         <script src="javascript/switchDisplayMode.js"></script>
     </body>
 </html>
