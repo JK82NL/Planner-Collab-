@@ -16,88 +16,88 @@ saveAppointmentBtn.addEventListener("click", saveAppointment);
 initCalendar();
 
 function saveAppointments() {
-  localStorage.setItem('appointments', JSON.stringify(appointments));
+    localStorage.setItem('appointments', JSON.stringify(appointments));
 }
 
 function getFormattedDate(dateObj) {
-  // Retourneert ISO yyyy-mm-dd formaat
-  return dateObj.toISOString().split('T')[0];
+    // Retourneert ISO yyyy-mm-dd formaat
+    return dateObj.toISOString().split('T')[0];
 }
 
 function initCalendar() {
-  if (calendarInstance) {
-    calendarInstance.destroy();
-  }
-
-  calendarInstance = flatpickr("#inline-calendar-form", {
-    inline: true,
-    dateFormat: "d-m-Y",
-    minDate: "today",
-    onChange: function(selectedDates, dateStr) {
-      if (selectedDates.length > 0) {
-        // Sla datum op in ISO-formaat (yyyy-mm-dd)
-        dateEl.value = getFormattedDate(selectedDates[0]);
-      }
-    },
-    onDayCreate: function(dObj, dStr, fp, dayElem) {
-      const date = getFormattedDate(dayElem.dateObj);
-
-      const hasAppointment = appointments.some(appt => appt.date === date);
-
-      if (hasAppointment) {
-        const dot = document.createElement('span');
-        dot.className = 'dot-indicator';
-        dayElem.appendChild(dot);
-      }
+    if (calendarInstance) {
+        calendarInstance.destroy();
     }
-  });
+
+    calendarInstance = flatpickr("#inline-calendar-form", {
+        inline: true,
+        dateFormat: "d-m-Y",
+        minDate: "today",
+        onChange: function (selectedDates, dateStr) {
+            if (selectedDates.length > 0) {
+                // Sla datum op in ISO-formaat (yyyy-mm-dd)
+                dateEl.value = getFormattedDate(selectedDates[0]);
+            }
+        },
+        onDayCreate: function (dObj, dStr, fp, dayElem) {
+            const date = getFormattedDate(dayElem.dateObj);
+
+            const hasAppointment = appointments.some(appt => appt.date === date);
+
+            if (hasAppointment) {
+                const dot = document.createElement('span');
+                dot.className = 'dot-indicator';
+                dayElem.appendChild(dot);
+            }
+        }
+    });
 }
 
 function saveAppointment() {
-  const appointment = {
-    id: idEl.value.trim(),
-    date: dateEl.value,
-    startTime: timeEl.value,
-    endTime: endTimeEl.value,
-    description: descriptionEl.value.trim()
-  };
+    const appointment = {
+        id: idEl.value.trim(),
+        date: dateEl.value,
+        startTime: timeEl.value,
+        endTime: endTimeEl.value,
+        description: descriptionEl.value.trim()
+    };
 
-  // Controleer alle velden
-  if (!appointment.id || !appointment.date || !appointment.startTime || !appointment.endTime || !appointment.description) {
-    alert("Vul alle velden in.");
-    return;
-  }
+    // Controleer alle velden
+    if (!appointment.id || !appointment.date || !appointment.startTime || !appointment.endTime || !appointment.description) {
+        alert("Vul alle velden in.");
+        return;
+    }
 
-  // Voeg toe aan array
-  appointments.push(appointment);
-  saveAppointments();
-  initCalendar();
+    // Voeg toe aan array
+    appointments.push(appointment);
+    saveAppointments();
+    initCalendar();
 
-  // Reset formulier
-  idEl.value = '';
-  dateEl.value = '';
-  timeEl.value = '';
-  endTimeEl.value = '';
-  descriptionEl.value = '';
+    // Reset formulier
+    idEl.value = '';
+    dateEl.value = '';
+    timeEl.value = '';
+    endTimeEl.value = '';
+    descriptionEl.value = '';
 }
 
 // Verwijder afspraak op index
 function delAppointment(index) {
-  appointments.splice(index, 1);
-  saveAppointments();
-  initCalendar();
+    appointments.splice(index, 1);
+    saveAppointments();
+    initCalendar();
 }
 
 // Bewerken van afspraak (laadt in formulier, verwijdert oude)
 function changeAppointment(index) {
-  const appt = appointments[index];
-  idEl.value = appt.id;
-  dateEl.value = appt.date;
-  timeEl.value = appt.startTime;
-  endTimeEl.value = appt.endTime;
-  descriptionEl.value = appt.description;
+    const appt = appointments[index];
+    idEl.value = appt.id;
+    dateEl.value = appt.date;
+    timeEl.value = appt.startTime;
+    endTimeEl.value = appt.endTime;
+    descriptionEl.value = appt.description;
 
-  appointments.splice(index, 1);
-  saveAppointments();
-  initCalendar();
+    appointments.splice(index, 1);
+    saveAppointments();
+    initCalendar();
 }
