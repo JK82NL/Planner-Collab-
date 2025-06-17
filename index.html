@@ -56,18 +56,6 @@
                                     <li class="nav-item">
                                         <span class="nav-spacer m-3">|</span>
                                     </li>
-                                    <li class="nav-item">
-                                        <a
-                                            class="nav-text"
-                                            href="#"
-                                            onclick="switchPage('appointmentPage')"
-                                            ><i class="bi bi-calendar-plus"> </i
-                                            >- Afspraak Toevoegen
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <span class="nav-spacer m-3">|</span>
-                                    </li>
 
                                     <li class="nav-item">
                                         <a
@@ -87,10 +75,10 @@
                                         <a
                                             class="nav-text"
                                             href="#"
-                                            onclick="switchPage('weekPage')"
-                                            ><i class="bi bi-calendar2-minus">
-                                            </i>
-                                            - Week</a
+                                            onclick="switchPage('dayPage')"
+                                            ><i class="bi bi-calendar4-event">
+                                            </i
+                                            >- Dag</a
                                         >
                                     </li>
 
@@ -102,13 +90,11 @@
                                         <a
                                             class="nav-text"
                                             href="#"
-                                            onclick="switchPage('dayPage')"
-                                            ><i class="bi bi-calendar4-event">
-                                            </i
-                                            >- Dag</a
-                                        >
+                                            onclick="switchPage('appointmentPage')"
+                                            ><i class="bi bi-calendar-plus"> </i
+                                            >- Afspraak Toevoegen
+                                        </a>
                                     </li>
-
                                     <li class="nav-item">
                                         <span class="nav-spacer m-3">|</span>
                                     </li>
@@ -203,10 +189,6 @@
                             </form>
                         </div>
 
-                        <div class="container" id="weekPage">
-                            <h1>Placeholder Week Display</h1>
-                        </div>
-
                         <!-- Day Page -->
                         <div class="container" id="dayPage">
                             <span
@@ -251,8 +233,7 @@
                             </div>
                         </div>
 
-                            <!-- Ending Divs for containing the info pages -->
-                        </div>
+                        <!-- Ending Divs for containing the info pages -->
                     </div>
                 </div>
             </div>

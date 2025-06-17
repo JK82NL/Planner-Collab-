@@ -3,12 +3,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Put pages into variables
     const appointmentPage = document.getElementById('appointmentPage');
     const monthPage = document.getElementById('monthPage');
-    const weekPage = document.getElementById('weekPage');
     const dayPage = document.getElementById('dayPage');
 
     // Set initial states
     appointmentPage.style.display = "none";
-    weekPage.style.display = "none";
     dayPage.style.display = "none";
     monthPage.style.display = "block"; // Show month page by default
 });
@@ -17,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function switchPage(targetPage) {
 
     // Put page variables into an array and hide them all.
-    const pages = [appointmentPage, monthPage, weekPage, dayPage];
+    const pages = [appointmentPage, monthPage, dayPage];
     pages.forEach(page => page.style.display = "none");
 
     // Show the page based on the button which was clicked.
@@ -27,9 +25,6 @@ function switchPage(targetPage) {
             break;
         case 'monthPage':
             monthPage.style.display = "block";
-            break;
-        case 'weekPage':
-            weekPage.style.display = "block";
             break;
         case 'dayPage':
             dayPage.style.display = "block";

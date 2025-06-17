@@ -66,7 +66,7 @@ a span {
     font-weight: 900;
 }
 
-/* MONTH PAGE | MAIN CALENDAR */
+/* MONTH VIEW PAGE | MAIN CALENDAR */
 #monthPage {
     display: none;
 }
@@ -93,7 +93,7 @@ a span {
     margin: 2px auto 0;
 }
 
-/* APPOINTMENT PAGE */
+/* APPOINTMENT PAGE | DAY VIEW PAGE */
 
 .appointmentPage {
     display: none;
@@ -117,11 +117,6 @@ a span {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     z-index: 2;
-}
-
-/* WEEK VIEW PAGE */
-#weekPage {
-    display: none;
 }
 
 /* DAY VIEW PAGE */
