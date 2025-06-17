@@ -124,21 +124,24 @@ a span {
     display: none;
 }
 
-#test-container {
-    width: 100vw;
-    height: 100vh;
-}
+/* #test-container {
+    width: 100%;
+    height: 100%;
+} */
 
 .time-table {
     height: 550px;
+    /* height: fit-content; */
 }
 
 #timeTable {
     height: 1440px;
+    /* height: fit-content; */
 }
 
 #appointmentgrid {
     height: 1440px;
+    /* height: fit-content; */
 }
 
 /* Footer with Brandname & Copyright text */
