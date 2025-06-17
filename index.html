@@ -56,58 +56,14 @@
                                     <li class="nav-item">
                                         <span class="nav-spacer m-3">|</span>
                                     </li>
-                                    <li class="nav-item">
-                                        <a
-                                            class="nav-text"
-                                            href="#"
-                                            onclick="switchPage('appointmentPage')"
-                                            ><i class="bi bi-calendar-plus">
-                                                - Toevoegen</i
-                                            >
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <span class="nav-spacer m-3">|</span>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a
-                                            class="nav-text"
-                                            href="#"
-                                            onclick="switchPage('fullscreenOverlay')"
-                                            ><i class="bi bi-arrows-fullscreen">
-                                                - Fullscreen</i
-                                            ></a
-                                        >
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <span class="nav-spacer m-3">|</span>
-                                    </li>
 
                                     <li class="nav-item">
                                         <a
                                             class="nav-text"
                                             href="#"
                                             onclick="switchPage('monthPage')"
-                                            ><i class="bi bi-calendar3">
-                                                - Maand</i
-                                            ></a
-                                        >
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <span class="nav-spacer m-3">|</span>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a
-                                            class="nav-text"
-                                            href="#"
-                                            onclick="switchPage('weekPage')"
-                                            ><i class="bi bi-calendar2-minus">
-                                                - Week</i
-                                            ></a
+                                            ><i class="bi bi-calendar3"> </i>-
+                                            Maand</a
                                         >
                                     </li>
 
@@ -121,11 +77,23 @@
                                             href="#"
                                             onclick="switchPage('dayPage')"
                                             ><i class="bi bi-calendar4-event">
-                                                - Dag</i
-                                            ></a
-                                        >
+                                            </i
+                                            >- Dag</a>
                                     </li>
 
+                                    <li class="nav-item">
+                                        <span class="nav-spacer m-3">|</span>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a
+                                            class="nav-text"
+                                            href="#"
+                                            onclick="switchPage('appointmentPage')"
+                                            ><i class="bi bi-calendar-plus"> </i
+                                            >- Afspraak Toevoegen
+                                        </a>
+                                    </li>
                                     <li class="nav-item">
                                         <span class="nav-spacer m-3">|</span>
                                     </li>
@@ -137,16 +105,15 @@
             </div>
         </div>
 
-        <!-- Starting Divs for containing the info pages -->
+        <!-- Opening Divs for containing all info pages -->
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div
                         class="d-flex justify-content-center align-items-center"
                     >
-                        <!-- Calendar Display  -->
 
-                        <!-- Month Display Block -->
+                      <!-- Month Display Block -->
                         <div class="p-5 m-5 homepage-body" id="monthPage">
                             <div id="inline-calendar-home"></div>
                         </div>
@@ -155,7 +122,7 @@
                         <div class="container" id="appointmentPage">
                             <form id="appointmentForm">
                                 <div class="row d-flex justify-content-center">
-                                    <div class="col-7">
+                                    <div class="col-7 mt-2">
                                         <input
                                             type="text"
                                             class="form-control"
@@ -194,6 +161,7 @@
                                         <label
                                             for="endingTime"
                                             class="form-label"
+
                                             >Tijd:</label
                                         >
                                         <input
@@ -234,10 +202,6 @@
                             </form>
                         </div>
 
-                        <div class="container" id="weekPage">
-                            <h1>Placeholder Week Display</h1>
-                        </div>
-
                         <!-- Day Page -->
 
                         <div class="container" id="dayPage">
@@ -276,38 +240,34 @@
                                         <button class="btn btn-secondary" type="button" id="nextDay">Next</button>
                                     </div> -->
                                 </div>
+                            </div>
 
-                                <div class="row d-flex justify-content-start">
-                                    <div class="row overflow-auto time-table">
-                                        <div class="col-2 border-end">
-                                            <div
-                                                id="timeTable"
-                                                class="position-relative time-table"
-                                            ></div>
-                                        </div>
+                            <div class="row d-flex justify-content-start">
+                                <div class="row overflow-auto">
+                                    <div class="col-2 border-end">
+                                        <div
+                                            id="timeTable"
+                                            class="position-relative"
+                                        ></div>
+                                    </div>
 
-                                        <div class="col-9">
-                                            <div
-                                                id="appointmentGrid"
-                                                class="position-relative"
-                                            ></div>
-                                        </div>
+                                    <div class="col-9">
+                                        <div
+                                            id="appointmentGrid"
+                                            class="position-relative"
+                                        ></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="container" id="fullscreenOverlay">
-                            <h1>Placeholder Fullscreen Overlay</h1>
-
-                            <!-- Ending Divs for containing the info pages -->
-                        </div>
+                      
+                        <!-- Ending Divs for containing the info pages -->
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Footer -->
 
+      <!-- Footer -->
         <footer class="container text-center">
             <div class="text-center m-4 footertext">
                 © 2025 Copyright:
@@ -334,11 +294,12 @@
             });
         </script>
 
+        <!-- Main Javascript -->
         <script src="javascript/index.js"></script>
 
-
-        <script src="javascript/appointmentOverview.js"></script>
         <script src="javascript/homeJS.js"></script>
+        <!-- Javascript for creating an appointment -->
+        <script src="javascript/appointmentOverview.js"></script>
         <!-- Hides and displays all pages through the navigation buttons -->
         <script src="javascript/switchDisplayMode.js"></script>
     </body>
