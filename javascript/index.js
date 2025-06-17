@@ -55,29 +55,7 @@ function initCalendar() {
         dayElem.appendChild(dot);
       }
     }
-
-    calendarInstance = flatpickr("#inline-calendar-form", {
-        inline: true,
-        dateFormat: "d-m-Y",
-        minDate: "today",
-        onChange: function (selectedDates, dateStr) {
-            if (selectedDates.length > 0) {
-                // Sla datum op in ISO-formaat (yyyy-mm-dd)
-                dateEl.value = getFormattedDate(selectedDates[0]);
-            }
-        },
-        onDayCreate: function (dObj, dStr, fp, dayElem) {
-            const date = getFormattedDate(dayElem.dateObj);
-
-            const hasAppointment = appointments.some(appt => appt.date === date);
-
-            if (hasAppointment) {
-                const dot = document.createElement('span');
-                dot.className = 'dot-indicator';
-                dayElem.appendChild(dot);
-            }
-        }
-    });
+  });
 }
 
 function saveAppointment() {
