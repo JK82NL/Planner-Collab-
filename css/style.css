@@ -51,7 +51,7 @@ img.logo {
 
 .nav-text {
     color: var(--purple);
-    font-weight: 900;
+    font-weight: 600;
     font-size: 12px;
 }
 
@@ -68,13 +68,7 @@ a span {
     font-weight: 900;
 }
 
-/* Display options for Calendar */
-
-#fullscreenOverlay {
-    display: none;
-}
-
-/* MONTH PAGE | MAIN CALENDAR */
+/* MONTH VIEW PAGE | MAIN CALENDAR */
 #monthPage {
     display: none;
 }
@@ -101,9 +95,9 @@ a span {
     margin: 2px auto 0;
 }
 
-/* APPOINTMENT PAGE */
+/* APPOINTMENT PAGE | DAY VIEW PAGE */
 
-.appointmentPage {
+#appointmentPage {
     display: none;
 }
 
@@ -127,31 +121,30 @@ a span {
     z-index: 2;
 }
 
-/* WEEK VIEW PAGE */
-#weekPage {
-    display: none;
-}
-
 /* DAY VIEW PAGE */
 #dayPage {
     display: none;
 }
 
 #test-container {
+
     width: 80vw;
     height: 80vh;
 }
 
 .time-table {
     height: 550px;
+    /* height: fit-content; */
 }
 
 #timeTable {
     height: 1440px;
+    /* height: fit-content; */
 }
 
 #appointmentgrid {
     height: 1440px;
+    /* height: fit-content; */
 }
 
 /* Footer with Brandname & Copyright text */
@@ -166,4 +159,17 @@ footer {
 
 .footername {
     color: color-mix(in oklab, var(--yellow), var(--purple));
+}
+
+/* Keeping if needed. !!! DELETE B4 FINISHED PRODUCT !!! */
+
+/* .shadow {
+    position: relative;
+    background: linear-gradient(
+        145deg,
+        color-mix(in oklab, var(--dark), var(--pink)),
+        color-mix(in oklab, var(--dark), var(--red)),
+        color-mix(in oklab, var(--dark), var(--dark))
+    );
+    border-radius: 15px;
 }

@@ -30,7 +30,6 @@ function appointmentOverview() {
 
       dateEl.innerHTML = pageDate;
     }
-
   }
 
   dateTitle()

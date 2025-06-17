@@ -20,12 +20,12 @@ saveAppointmentBtn.addEventListener("click", saveAppointment);
 initCalendar();
 
 function saveAppointments() {
-  localStorage.setItem('appointments', JSON.stringify(appointments));
+    localStorage.setItem('appointments', JSON.stringify(appointments));
 }
 
 function getFormattedDate(dateObj) {
-  // Retourneert ISO yyyy-mm-dd formaat
-  return dateObj.toISOString().split('T')[0];
+    // Retourneert ISO yyyy-mm-dd formaat
+    return dateObj.toISOString().split('T')[0];
 }
 
 function initCalendar() {
@@ -55,7 +55,29 @@ function initCalendar() {
         dayElem.appendChild(dot);
       }
     }
-  });
+
+    calendarInstance = flatpickr("#inline-calendar-form", {
+        inline: true,
+        dateFormat: "d-m-Y",
+        minDate: "today",
+        onChange: function (selectedDates, dateStr) {
+            if (selectedDates.length > 0) {
+                // Sla datum op in ISO-formaat (yyyy-mm-dd)
+                dateEl.value = getFormattedDate(selectedDates[0]);
+            }
+        },
+        onDayCreate: function (dObj, dStr, fp, dayElem) {
+            const date = getFormattedDate(dayElem.dateObj);
+
+            const hasAppointment = appointments.some(appt => appt.date === date);
+
+            if (hasAppointment) {
+                const dot = document.createElement('span');
+                dot.className = 'dot-indicator';
+                dayElem.appendChild(dot);
+            }
+        }
+    });
 }
 
 function saveAppointment() {
@@ -77,7 +99,6 @@ function saveAppointment() {
     // Voeg toe aan array
     const pageDate = document.getElementById('date');
     pageDate.setAttribute('date', dateEl.value);
-
     appointments.push(appointment);
     saveAppointments();
     initCalendar();
@@ -117,21 +138,21 @@ function saveAppointment() {
 
 // Verwijder afspraak op index
 function delAppointment(index) {
-  appointments.splice(index, 1);
-  saveAppointments();
-  initCalendar();
+    appointments.splice(index, 1);
+    saveAppointments();
+    initCalendar();
 }
 
 // Bewerken van afspraak (laadt in formulier, verwijdert oude)
 function changeAppointment(index) {
-  const appt = appointments[index];
-  idEl.value = appt.id;
-  dateEl.value = appt.date;
-  timeEl.value = appt.startTime;
-  endTimeEl.value = appt.endTime;
-  descriptionEl.value = appt.description;
+    const appt = appointments[index];
+    idEl.value = appt.id;
+    dateEl.value = appt.date;
+    timeEl.value = appt.startTime;
+    endTimeEl.value = appt.endTime;
+    descriptionEl.value = appt.description;
 
-  appointments.splice(index, 1);
-  saveAppointments();
-  initCalendar();
+    appointments.splice(index, 1);
+    saveAppointments();
+    initCalendar();
 }
