@@ -122,7 +122,7 @@
                         <div class="container" id="appointmentPage">
                             <form id="appointmentForm">
                                 <div class="row d-flex justify-content-center">
-                                    <div class="col-7">
+                                    <div class="col-7 mt-2">
                                         <input
                                             type="text"
                                             class="form-control"
@@ -158,6 +158,16 @@
                                             class="form-control"
                                             id="startingTime"
                                         />
+                                        <label
+                                            for="endingTime"
+                                            class="form-label"
+                                            >Eind:</label
+                                        >
+                                        <input
+                                            type="time"
+                                            class="form-control"
+                                            id="endingTime"
+                                        />
                                     </div>
                                 </div>
 
@@ -190,43 +200,32 @@
                         </div>
 
                         <!-- Day Page -->
+
                         <div class="container" id="dayPage">
-                            <!-- <span
-                                class="row position-absolute justify-content-center align-items-center"
-                                id="test-container"
-                            ></span> -->
-                            <!-- Load popup cards -->
-
-                            <div class="container">
-                                <div class="row d-flex justify-content-center">
-                                    <div class="col-6 text-center">
-                                        <!-- Placeholder for current date -->
-                                        <p
-                                            class="h3"
-                                            id="date"
-                                            date="16-06-2025"
-                                        >
-                                            Monday 16th June
-                                        </p>
-                                        <!-- use date attribute for loaded date 'dd-mm-YY' -->
-                                    </div>
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-6 mt-1 text-center">
+                                    <!-- Placeholder for current date -->
+                                    <p class="h3" id="date" date="16-06-2025">
+                                        Monday 16th June
+                                    </p>
+                                    <!-- use date attribute for loaded date 'dd-mm-YY' -->
                                 </div>
+                            </div>
 
-                                <div class="row d-flex justify-content-start">
-                                    <div class="row overflow-auto time-table">
-                                        <div class="col-2 border-end">
-                                            <div
-                                                id="timeTable"
-                                                class="position-relative time-table"
-                                            ></div>
-                                        </div>
+                            <div class="row d-flex justify-content-start">
+                                <div class="row overflow-auto">
+                                    <div class="col-2 border-end">
+                                        <div
+                                            id="timeTable"
+                                            class="position-relative"
+                                        ></div>
+                                    </div>
 
-                                        <div class="col-9">
-                                            <div
-                                                id="appointmentGrid"
-                                                class="position-relative"
-                                            ></div>
-                                        </div>
+                                    <div class="col-9">
+                                        <div
+                                            id="appointmentGrid"
+                                            class="position-relative"
+                                        ></div>
                                     </div>
                                 </div>
                             </div>
@@ -237,8 +236,8 @@
                 </div>
             </div>
         </div>
-        <!-- Footer -->
 
+        <!-- Footer -->
         <footer class="container text-center">
             <div class="text-center m-4 footertext">
                 © 2025 Copyright:

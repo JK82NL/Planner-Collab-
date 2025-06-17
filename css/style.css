@@ -95,7 +95,7 @@ a span {
 
 /* APPOINTMENT PAGE | DAY VIEW PAGE */
 
-.appointmentPage {
+#appointmentPage {
     display: none;
 }
 
@@ -124,10 +124,10 @@ a span {
     display: none;
 }
 
-/* #test-container {
+#test-container {
     width: 100%;
     height: 100%;
-} */
+}
 
 .time-table {
     height: 550px;
