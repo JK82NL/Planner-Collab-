@@ -6,9 +6,13 @@ let endTimeEl = document.getElementById("endingTime");
 let descriptionEl = document.getElementById("description");
 const saveAppointmentBtn = document.getElementById("sendDataButton");
 
+const container = document.getElementById('test-container');
+
 // Afspraken laden of lege array als none
 let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
 let calendarInstance = null;
+
+let edit = null;
 
 // Event listener
 saveAppointmentBtn.addEventListener("click", saveAppointment);
@@ -25,8 +29,31 @@ function getFormattedDate(dateObj) {
 }
 
 function initCalendar() {
-    if (calendarInstance) {
-        calendarInstance.destroy();
+  if (calendarInstance) {
+    calendarInstance.destroy();
+  }
+
+  calendarInstance = flatpickr("#inline-calendar-form", {
+    inline: true,
+    dateFormat: "d-m-Y",
+    minDate: "today",
+    onChange: function(selectedDates, dateStr) {
+      if (selectedDates.length > 0) {
+        // Sla datum op in ISO-formaat (yyyy-mm-dd)
+        // dateEl.value = getFormattedDate(selectedDates[0]); << This formats the date wrong
+        dateEl.value = dateStr;
+      }
+    },
+    onDayCreate: function(dObj, dStr, fp, dayElem) {
+      const date = getFormattedDate(dayElem.dateObj);
+
+      const hasAppointment = appointments.some(appt => appt.date === date);
+
+      if (hasAppointment) {
+        const dot = document.createElement('span');
+        dot.className = 'dot-indicator';
+        dayElem.appendChild(dot);
+      }
     }
 
     calendarInstance = flatpickr("#inline-calendar-form", {
@@ -54,21 +81,24 @@ function initCalendar() {
 }
 
 function saveAppointment() {
-    const appointment = {
-        id: idEl.value.trim(),
-        date: dateEl.value,
-        startTime: timeEl.value,
-        endTime: endTimeEl.value,
-        description: descriptionEl.value.trim()
-    };
+  const appointment = {
+    id: idEl.value.trim(),
+    date: dateEl.value,
+    startTime: timeEl.value,
+    endTime: endTimeEl.value,
+    description: descriptionEl.value.trim()
+  };
 
-    // Controleer alle velden
-    if (!appointment.id || !appointment.date || !appointment.startTime || !appointment.endTime || !appointment.description) {
-        alert("Vul alle velden in.");
-        return;
-    }
+  // Controleer alle velden
+  if (!appointment.id || !appointment.date || !appointment.startTime || !appointment.endTime || !appointment.description) {
+    alert("Vul alle velden in.");
+    return;
+  }
 
+  if(!edit) {
     // Voeg toe aan array
+    const pageDate = document.getElementById('date');
+    pageDate.setAttribute('date', dateEl.value);
     appointments.push(appointment);
     saveAppointments();
     initCalendar();
@@ -79,6 +109,31 @@ function saveAppointment() {
     timeEl.value = '';
     endTimeEl.value = '';
     descriptionEl.value = '';
+
+    switchPage('dayPage');
+
+  } else {
+    appointments[edit].id = idEl.value;
+    appointments[edit].date = dateEl.value;
+    appointments[edit].startTime = timeEl.value;
+    appointments[edit].endTime = endTimeEl.value;
+    appointments[edit].description = descriptionEl.value.trim();
+    saveAppointments();
+    initCalendar();
+    edit = null;
+
+    const pageDate = document.getElementById('date');
+    pageDate.setAttribute('date', dateEl.value);
+
+    idEl.value = '';
+    dateEl.value = '';
+    timeEl.value = '';
+    endTimeEl.value = '';
+    descriptionEl.value = '';
+
+    switchPage('dayPage');
+  }
+
 }
 
 // Verwijder afspraak op index

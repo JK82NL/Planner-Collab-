@@ -28,6 +28,7 @@ function switchPage(targetPage) {
             break;
         case 'dayPage':
             dayPage.style.display = "block";
+            appointmentOverview();
             break;
         default:
             monthPage.style.display = "block"; // Default to month view

@@ -1,3 +1,5 @@
+// Laden van afspraken uit localStorage
+// let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
 
   // Laad afspraken uit localStorage
   const appointments = JSON.parse(localStorage.getItem('appointments')) || [];
