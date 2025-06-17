@@ -212,26 +212,40 @@ function prevNextBtns() {
   const nextBtn = document.getElementById('nextDay');
 
   prevBtn.addEventListener('click', function() {
-    let dateSplit = document.getElementById('date').getAttribute('date').split('-');
-    let newDay = parseInt(dateSplit[0], 10);
-    newDay -= 1;
-    dateSplit[0] = newDay.toString();
-    const prevDate = dateSplit.join("-");
-    console.log(prevDate);
+    const dateString = document.getElementById('date').getAttribute('date');
+    const format = "d-m-Y"; // Day-Month-Year format
+
+    // Convert string to Date object
+    const parsedDate = flatpickr.parseDate(dateString, format);
+    const dateObj = new Date(parsedDate).fp_incr(-1);
+    const readableDate = flatpickr.formatDate(dateObj, "F j, Y");
+    const useableDate = flatpickr.formatDate(dateObj, "d-m-Y");
+
+    console.log(dateObj, readableDate, useableDate);
+
     const pageDateAtr = document.getElementById('date');
-    pageDateAtr.setAttribute('date', prevDate);
+    pageDateAtr.innerHTML = readableDate;
+    pageDateAtr.setAttribute('date', useableDate);
     switchPage('dayPage');
   })
 
   nextBtn.addEventListener('click', function() {
-    let dateSplit = document.getElementById('date').getAttribute('date').split('-');
-    let newDay = parseInt(dateSplit[0], 10);
-    newDay += 1;
-    dateSplit[0] = newDay.toString();
-    const prevDate = dateSplit.join("-");
-    console.log(prevDate);
+    const dateString = document.getElementById('date').getAttribute('date');
+    const format = "d-m-Y"; // Day-Month-Year format
+
+    // Convert string to Date object
+    const parsedDate = flatpickr.parseDate(dateString, format);
+    const dateObj = new Date(parsedDate).fp_incr(1);
+    const readableDate = flatpickr.formatDate(dateObj, "F j, Y");
+    const useableDate = flatpickr.formatDate(dateObj, "d-m-Y");
+
+    console.log(dateObj, readableDate, useableDate);
+
     const pageDateAtr = document.getElementById('date');
-    pageDateAtr.setAttribute('date', prevDate);
+    pageDateAtr.innerHTML = readableDate;
+    pageDateAtr.setAttribute('date', useableDate);
     switchPage('dayPage');
   })
 }
+
+prevNextBtns()
