@@ -46,6 +46,7 @@ function switchPage(targetPage) {
             break;
         case 'dayPage':
             dayPage.style.display = "block";
+            appointmentOverview();
             break;
         case 'fullscreenOverlay':
             fullscreenOverlay.style.display = "block";

@@ -6,9 +6,13 @@ let endTimeEl = document.getElementById("endingTime");
 let descriptionEl = document.getElementById("description");
 const saveAppointmentBtn = document.getElementById("sendDataButton");
 
+const container = document.getElementById('test-container');
+
 // Afspraken laden of lege array als none
 let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
 let calendarInstance = null;
+
+let edit = null;
 
 // Event listener
 saveAppointmentBtn.addEventListener("click", saveAppointment);
@@ -36,7 +40,8 @@ function initCalendar() {
     onChange: function(selectedDates, dateStr) {
       if (selectedDates.length > 0) {
         // Sla datum op in ISO-formaat (yyyy-mm-dd)
-        dateEl.value = getFormattedDate(selectedDates[0]);
+        // dateEl.value = getFormattedDate(selectedDates[0]); << This formats the date wrong
+        dateEl.value = dateStr;
       }
     },
     onDayCreate: function(dObj, dStr, fp, dayElem) {
@@ -68,17 +73,46 @@ function saveAppointment() {
     return;
   }
 
-  // Voeg toe aan array
-  appointments.push(appointment);
-  saveAppointments();
-  initCalendar();
+  if(!edit) {
+    // Voeg toe aan array
+    const pageDate = document.getElementById('date');
+    pageDate.setAttribute('date', dateEl.value);
 
-  // Reset formulier
-  idEl.value = '';
-  dateEl.value = '';
-  timeEl.value = '';
-  endTimeEl.value = '';
-  descriptionEl.value = '';
+    appointments.push(appointment);
+    saveAppointments();
+    initCalendar();
+
+    // Reset formulier
+    idEl.value = '';
+    dateEl.value = '';
+    timeEl.value = '';
+    endTimeEl.value = '';
+    descriptionEl.value = '';
+
+    switchPage('dayPage');
+
+  } else {
+    appointments[edit].id = idEl.value;
+    appointments[edit].date = dateEl.value;
+    appointments[edit].startTime = timeEl.value;
+    appointments[edit].endTime = endTimeEl.value;
+    appointments[edit].description = descriptionEl.value.trim();
+    saveAppointments();
+    initCalendar();
+    edit = null;
+
+    const pageDate = document.getElementById('date');
+    pageDate.setAttribute('date', dateEl.value);
+
+    idEl.value = '';
+    dateEl.value = '';
+    timeEl.value = '';
+    endTimeEl.value = '';
+    descriptionEl.value = '';
+
+    switchPage('dayPage');
+  }
+
 }
 
 // Verwijder afspraak op index

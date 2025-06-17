@@ -191,6 +191,16 @@
                                             class="form-control"
                                             id="startingTime"
                                         />
+                                        <label
+                                            for="endingTime"
+                                            class="form-label"
+                                            >Tijd:</label
+                                        >
+                                        <input
+                                            type="time"
+                                            class="form-control"
+                                            id="endingTime"
+                                        />
                                     </div>
                                 </div>
 
@@ -208,6 +218,8 @@
                                             style="resize: none"
                                         ></textarea>
                                     </div>
+
+                                    
                                 </div>
 
                                 <div class="col-9 mt-3 text-end">
@@ -227,7 +239,16 @@
                         </div>
 
                         <!-- Day Page -->
+
                         <div class="container" id="dayPage">
+                            <div class="row justify-content-center">
+                                <div class="col-3 text-end">
+                                    <button class="btn btn-sm btn-secondary" type="button" id="prevDay">Prev</button>
+                                </div>
+                                <div class="col-3 text-star">
+                                    <button class="btn btn-sm btn-secondary" type="button" id="nextDay">Next</button>
+                                </div>
+                            </div>
                             <span
                                 class="row position-absolute justify-content-center align-items-center"
                                 id="test-container"
@@ -237,17 +258,23 @@
 
                             <div class="container">
                                 <div class="row d-flex justify-content-center">
+                                    <!-- <div class="col-3 text-end">
+                                        <button class="btn btn-secondary" type="button" id="prevDay">Prev</button>
+                                    </div> -->
                                     <div class="col-6 text-center">
                                         <!-- Placeholder for current date -->
                                         <p
                                             class="h3"
                                             id="date"
-                                            date="16-06-2025"
+                                            date="17-06-2025"
                                         >
-                                            Monday 16th June
+                                            
                                         </p>
                                         <!-- use date attribute for loaded date 'dd-mm-YY' -->
                                     </div>
+                                    <!-- <div class="col-3 text-star">
+                                        <button class="btn btn-secondary" type="button" id="nextDay">Next</button>
+                                    </div> -->
                                 </div>
 
                                 <div class="row d-flex justify-content-start">
@@ -309,7 +336,6 @@
 
         <script src="javascript/index.js"></script>
 
-        <script src="javascript/appointmentOverview.js"></script>
 
         <script src="javascript/appointmentOverview.js"></script>
         <script src="javascript/homeJS.js"></script>

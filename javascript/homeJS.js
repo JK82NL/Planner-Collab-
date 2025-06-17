@@ -1,5 +1,5 @@
 // Laden van afspraken uit localStorage
-let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+// let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
 
 function getFormattedDate(dateObj) {
   return dateObj.toISOString().split('T')[0];
