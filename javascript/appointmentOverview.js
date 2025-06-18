@@ -1,35 +1,28 @@
 function appointmentOverview() {
-  const pageDate = document.getElementById('date').getAttribute('date');
+  const pageDate = document.getElementById('date');
   appointments = JSON.parse(localStorage.getItem('appointments')) || [];
   let cardLoaded = false;
   let apptArray = [];
 
-  const monthsArray = [
-    "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
-  ]
-
   function dateTitle() {
-    const dateEl = document.getElementById('date');
-    let newDate = pageDate.replaceAll('-', '/');
+    const pageDateAtr = document.getElementById('date');
+    const format = "d-m-Y"; // Day-Month-Year format
 
-    newDate = new Date().toLocaleDateString('en-GB');
+    if(!pageDate.getAttribute('date')) {
+      const dateObj = new Date();
+      const readableDate = flatpickr.formatDate(dateObj, "F j, Y");
+      const useableDate = flatpickr.formatDate(dateObj, "d-m-Y");
 
-    if(pageDate !== '') {
-      let dateSplit = document.getElementById('date').getAttribute('date').split('-');
-      let month = (parseInt(dateSplit[1]) - 1);
-
-      let dayStr = (dateSplit[0] + " " + monthsArray[month] + " " + dateSplit[2]);
-
-      dateEl.innerHTML = dayStr;
-
+      pageDate.setAttribute('date', useableDate);
+      pageDate.innerHTML = readableDate;
     } else {
-      let dateSplit = document.getElementById('date').getAttribute('date').split('-');
-      let month = parseInt(dateSplit[1]);
+      // Convert string to Date object
+      const parsedDate = flatpickr.parseDate(pageDate.getAttribute('date'), format);
+      const dateObj = new Date(parsedDate);
+      const readableDate = flatpickr.formatDate(dateObj, "F j, Y");
 
-      let dayStr = (dateSplit[0] + " " + monthsArray[month] + " " + dateSplit[2]);
-
-      dateEl.innerHTML = pageDate;
-    }
+      pageDate.innerHTML = readableDate;
+    };
   }
 
   dateTitle()
@@ -39,7 +32,7 @@ function appointmentOverview() {
   function generateApptArray() {
     // Load the array, based off the page date.
     appointments.forEach((appt, index) => {
-      if(appt.date === pageDate) {
+      if(appt.date === pageDate.getAttribute('date')) {
         appt.index = index;
         apptArray.push(appt);
       }
@@ -206,44 +199,38 @@ function appointmentOverview() {
 }
 
 
-// Doesn't work yet;
+// Change date button listeners
 function prevNextBtns() {
   const prevBtn = document.getElementById('prevDay');
   const nextBtn = document.getElementById('nextDay');
 
   prevBtn.addEventListener('click', function() {
-    const dateString = document.getElementById('date').getAttribute('date');
+    const pageDate = document.getElementById('date');
     const format = "d-m-Y"; // Day-Month-Year format
 
     // Convert string to Date object
-    const parsedDate = flatpickr.parseDate(dateString, format);
+    const parsedDate = flatpickr.parseDate(pageDate.getAttribute('date'), format);
     const dateObj = new Date(parsedDate).fp_incr(-1);
     const readableDate = flatpickr.formatDate(dateObj, "F j, Y");
     const useableDate = flatpickr.formatDate(dateObj, "d-m-Y");
-
-    console.log(dateObj, readableDate, useableDate);
-
-    const pageDateAtr = document.getElementById('date');
-    pageDateAtr.innerHTML = readableDate;
-    pageDateAtr.setAttribute('date', useableDate);
+    
+    pageDate.innerHTML = readableDate;
+    pageDate.setAttribute('date', useableDate);
     switchPage('dayPage');
   })
 
   nextBtn.addEventListener('click', function() {
-    const dateString = document.getElementById('date').getAttribute('date');
+    const pageDate = document.getElementById('date');
     const format = "d-m-Y"; // Day-Month-Year format
 
     // Convert string to Date object
-    const parsedDate = flatpickr.parseDate(dateString, format);
+    const parsedDate = flatpickr.parseDate(pageDate.getAttribute('date'), format);
     const dateObj = new Date(parsedDate).fp_incr(1);
     const readableDate = flatpickr.formatDate(dateObj, "F j, Y");
     const useableDate = flatpickr.formatDate(dateObj, "d-m-Y");
 
-    console.log(dateObj, readableDate, useableDate);
-
-    const pageDateAtr = document.getElementById('date');
-    pageDateAtr.innerHTML = readableDate;
-    pageDateAtr.setAttribute('date', useableDate);
+    pageDate.innerHTML = readableDate;
+    pageDate.setAttribute('date', useableDate);
     switchPage('dayPage');
   })
 }
