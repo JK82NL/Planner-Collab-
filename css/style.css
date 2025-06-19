@@ -152,14 +152,6 @@ a span {
     /* height: fit-content; */
 }
 
-/* MAKE CARD DISPLAY STICKY IN CENTER */
-.card {
-    border: 3px solid var(--purple);
-    position: sticky;
-    background: var(--red);
-    box-shadow: 10px 10px 10px rgba(107, 51, 94, 0.1);
-}
-
 /* Footer with Brandname & Copyright text */
 
 footer {
