@@ -161,7 +161,7 @@ function appointmentOverview() {
                   <strong>${appt.id}</strong><br/>
                   <small>${appt.description}</small>
                   `;
-
+       
       const startMin = timeToMinutes(appt.startTime);
       const endMin = timeToMinutes(appt.endTime);
       const duration = endMin - startMin;
