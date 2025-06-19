@@ -78,7 +78,8 @@
                                             onclick="switchPage('dayPage')"
                                             ><i class="bi bi-calendar4-event">
                                             </i
-                                            >- Dag</a>
+                                            >- Dag</a
+                                        >
                                     </li>
 
                                     <li class="nav-item">
@@ -112,8 +113,7 @@
                     <div
                         class="d-flex justify-content-center align-items-center"
                     >
-
-                      <!-- Month Display Block -->
+                        <!-- Month Display Block -->
                         <div class="p-5 m-5 homepage-body" id="monthPage">
                             <div id="inline-calendar-home"></div>
                         </div>
@@ -161,7 +161,6 @@
                                         <label
                                             for="endingTime"
                                             class="form-label"
-
                                             >Tijd:</label
                                         >
                                         <input
@@ -186,8 +185,6 @@
                                             style="resize: none"
                                         ></textarea>
                                     </div>
-
-                                    
                                 </div>
 
                                 <div class="col-9 mt-3 text-end">
@@ -205,12 +202,24 @@
                         <!-- Day Page -->
 
                         <div class="container" id="dayPage">
-                            <div class="row justify-content-center">
+                            <div class="row justify-content-center mt-1">
                                 <div class="col-3 text-end">
-                                    <button class="btn btn-sm btn-secondary" type="button" id="prevDay">Prev</button>
+                                    <button
+                                        class="btn btn-sm day-btn"
+                                        type="button"
+                                        id="prevDay"
+                                    >
+                                        Prev
+                                    </button>
                                 </div>
                                 <div class="col-3 text-star">
-                                    <button class="btn btn-sm btn-secondary" type="button" id="nextDay">Next</button>
+                                    <button
+                                        class="btn btn-sm day-btn"
+                                        type="button"
+                                        id="nextDay"
+                                    >
+                                        Next
+                                    </button>
                                 </div>
                             </div>
                             <span
@@ -231,9 +240,7 @@
                                             class="h3"
                                             id="date"
                                             date="17-06-2025"
-                                        >
-                                            
-                                        </p>
+                                        ></p>
                                         <!-- use date attribute for loaded date 'dd-mm-YY' -->
                                     </div>
                                     <!-- <div class="col-3 text-star">
@@ -260,14 +267,14 @@
                                 </div>
                             </div>
                         </div>
-                      
+
                         <!-- Ending Divs for containing the info pages -->
                     </div>
                 </div>
             </div>
         </div>
 
-      <!-- Footer -->
+        <!-- Footer -->
         <footer class="container text-center">
             <div class="text-center m-4 footertext">
                 © 2025 Copyright:

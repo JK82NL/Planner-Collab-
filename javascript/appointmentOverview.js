@@ -14,7 +14,7 @@ function appointmentOverview() {
 
     newDate = new Date().toLocaleDateString('en-GB');
 
-    if(pageDate !== '') {
+    if (pageDate !== '') {
       let dateSplit = document.getElementById('date').getAttribute('date').split('-');
       let month = (parseInt(dateSplit[1]) - 1);
 
@@ -35,11 +35,11 @@ function appointmentOverview() {
   dateTitle()
 
   container.innerHTML = '';
-  
+
   function generateApptArray() {
     // Load the array, based off the page date.
     appointments.forEach((appt, index) => {
-      if(appt.date === pageDate) {
+      if (appt.date === pageDate) {
         appt.index = index;
         apptArray.push(appt);
       }
@@ -60,7 +60,7 @@ function appointmentOverview() {
 
   function loadCard(card) {
 
-    if(!cardLoaded) {
+    if (!cardLoaded) {
 
       const cardEl = document.createElement('div');
       cardEl.className = "card p-2 position-absolute col-3 z-3";
@@ -95,21 +95,22 @@ function appointmentOverview() {
       const deleteBtn = document.getElementById('delBtn');
       const editBtn = document.getElementById('editBtn');
 
-      closeBtn.addEventListener('click', function() {container.innerHTML = ''; cardLoaded = false;});
+      closeBtn.addEventListener('click', function () { container.innerHTML = ''; cardLoaded = false; });
 
-      deleteBtn.addEventListener('click', function() {
-        container.innerHTML = ''; 
-        cardLoaded = false; 
+      deleteBtn.addEventListener('click', function () {
+        container.innerHTML = '';
+        cardLoaded = false;
         apptArray.splice(card.id, 1);
         delAppointment(card.id);
         saveAppointments();
-        generateAppointments()}); // Reload Appointments
+        generateAppointments()
+      }); // Reload Appointments
 
-      editBtn.addEventListener('click', function() {
+      editBtn.addEventListener('click', function () {
         edit = apptArray[card.id].index;
         idEl.value = apptArray[card.id].id;
         dateEl.value = apptArray[card.id].startTime;
-        timeEl.value =  apptArray[card.id].startTime;
+        timeEl.value = apptArray[card.id].startTime;
         endTimeEl.value = apptArray[card.id].endTime;
         descriptionEl.value = apptArray[card.id].description;
         switchPage('appointmentPage');
@@ -153,7 +154,7 @@ function appointmentOverview() {
       const card = document.createElement("div");
 
 
-      card.addEventListener('click', function() {loadCard(this)});
+      card.addEventListener('click', function () { loadCard(this) });
       card.id = index;
 
       card.className = "appointment-card";
@@ -211,7 +212,7 @@ function prevNextBtns() {
   const prevBtn = document.getElementById('prevDay');
   const nextBtn = document.getElementById('nextDay');
 
-  prevBtn.addEventListener('click', function() {
+  prevBtn.addEventListener('click', function () {
     const dateString = document.getElementById('date').getAttribute('date');
     const format = "d-m-Y"; // Day-Month-Year format
 
@@ -229,7 +230,7 @@ function prevNextBtns() {
     switchPage('dayPage');
   })
 
-  nextBtn.addEventListener('click', function() {
+  nextBtn.addEventListener('click', function () {
     const dateString = document.getElementById('date').getAttribute('date');
     const format = "d-m-Y"; // Day-Month-Year format
 
