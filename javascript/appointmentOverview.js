@@ -1,55 +1,50 @@
 function appointmentOverview() {
-  const pageDate = document.getElementById('date').getAttribute('date');
-  appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+  const pageDate = document.getElementById("date").getAttribute("date");
+  appointments = JSON.parse(localStorage.getItem("appointments")) || [];
   let cardLoaded = false;
   let apptArray = [];
 
-  const monthsArray = [
-    "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
-  ]
+  function updateDate() {
+    const dateString = document.getElementById("date").getAttribute("date");
+    const format = "d-m-Y"; // Day-Month-Year format
 
-  function dateTitle() {
-    const dateEl = document.getElementById('date');
-    let newDate = pageDate.replaceAll('-', '/');
+    if (dateString === "") {
+      const dateObj = new Date();
+      const readableDate = flatpickr.formatDate(dateObj, "F j, Y");
+      const useableDate = flatpickr.formatDate(dateObj, "d-m-Y");
 
-    newDate = new Date().toLocaleDateString('en-GB');
-
-    if (pageDate !== '') {
-      let dateSplit = document.getElementById('date').getAttribute('date').split('-');
-      let month = (parseInt(dateSplit[1]) - 1);
-
-      let dayStr = (dateSplit[0] + " " + monthsArray[month] + " " + dateSplit[2]);
-
-      dateEl.innerHTML = dayStr;
-
+      const pageDateAtr = document.getElementById("date");
+      pageDateAtr.innerHTML = readableDate;
+      pageDateAtr.setAttribute("date", useableDate);
     } else {
-      let dateSplit = document.getElementById('date').getAttribute('date').split('-');
-      let month = parseInt(dateSplit[1]);
+      const parsedDate = flatpickr.parseDate(dateString, format);
+      const dateObj = new Date(parsedDate);
+      const readableDate = flatpickr.formatDate(dateObj, "F j, Y");
+      const useableDate = flatpickr.formatDate(dateObj, "d-m-Y");
 
-      let dayStr = (dateSplit[0] + " " + monthsArray[month] + " " + dateSplit[2]);
-
-      dateEl.innerHTML = pageDate;
+      const pageDateAtr = document.getElementById("date");
+      pageDateAtr.innerHTML = readableDate;
+      pageDateAtr.setAttribute("date", useableDate);
     }
   }
 
-  dateTitle()
+  updateDate();
 
-  container.innerHTML = '';
+  container.innerHTML = "";
 
   function generateApptArray() {
     // Load the array, based off the page date.
-    appointments.forEach((appt, index) => {
+    appointments.forEach((appt) => {
       if (appt.date === pageDate) {
-        appt.index = index;
         apptArray.push(appt);
       }
-    })
+    });
   }
 
-  generateApptArray()
+  generateApptArray();
 
   function saveAppointments() {
-    localStorage.setItem('appointments', JSON.stringify(appointments));
+    localStorage.setItem("appointments", JSON.stringify(appointments));
   }
 
   function delAppointment(index) {
@@ -57,12 +52,16 @@ function appointmentOverview() {
     saveAppointments();
   }
 
+  function updateAppointmentIndex() {
+    appointments.forEach((appt, index) => {
+      appt.index = index;
+      saveAppointments();
+    });
+  }
 
   function loadCard(card) {
-
     if (!cardLoaded) {
-
-      const cardEl = document.createElement('div');
+      const cardEl = document.createElement("div");
       cardEl.className = "card p-2 position-absolute col-3 z-3";
 
       // Not the prettiest code, but it works
@@ -74,9 +73,13 @@ function appointmentOverview() {
             <div class="card-body">
               <h5 class="card-title text-center">${apptArray[card.id].id}</h5>
               <span class="row justify-content-center">
-                  <small class="col-3 text-end">${apptArray[card.id].startTime}</small>
+                  <small class="col-3 text-end">${
+                    apptArray[card.id].startTime
+                  }</small>
                   <small class="col-1 text-center">-</small>
-                  <small class="col-3 text-start">${apptArray[card.id].endTime}</small>
+                  <small class="col-3 text-start">${
+                    apptArray[card.id].endTime
+                  }</small>
               </span>
               <p class="class-text p-4">${apptArray[card.id].description}</p>
             </div>
@@ -91,29 +94,32 @@ function appointmentOverview() {
       container.innerHTML += cardElHTML;
 
       // Load button events
-      const closeBtn = document.getElementById('closeBtn');
-      const deleteBtn = document.getElementById('delBtn');
-      const editBtn = document.getElementById('editBtn');
+      const closeBtn = document.getElementById("closeBtn");
+      const deleteBtn = document.getElementById("delBtn");
+      const editBtn = document.getElementById("editBtn");
 
-      closeBtn.addEventListener('click', function () { container.innerHTML = ''; cardLoaded = false; });
+      closeBtn.addEventListener("click", function () {
+        container.innerHTML = "";
+        cardLoaded = false;
+      });
 
-      deleteBtn.addEventListener('click', function () {
-        container.innerHTML = '';
+      deleteBtn.addEventListener("click", function () {
+        container.innerHTML = "";
         cardLoaded = false;
         apptArray.splice(card.id, 1);
         delAppointment(card.id);
-        saveAppointments();
-        generateAppointments()
+        updateAppointmentIndex();
+        generateAppointments();
       }); // Reload Appointments
 
-      editBtn.addEventListener('click', function () {
+      editBtn.addEventListener("click", function () {
         edit = apptArray[card.id].index;
         idEl.value = apptArray[card.id].id;
-        dateEl.value = apptArray[card.id].startTime;
+        dateEl.value = apptArray[card.id].date;
         timeEl.value = apptArray[card.id].startTime;
         endTimeEl.value = apptArray[card.id].endTime;
         descriptionEl.value = apptArray[card.id].description;
-        switchPage('appointmentPage');
+        switchPage("appointmentPage");
       });
 
       cardLoaded = true;
@@ -146,15 +152,16 @@ function appointmentOverview() {
   function generateAppointments() {
     const container = document.getElementById("appointmentGrid");
 
-    container.innerHTML = ''; // TEMP for reloading the appointments
+    container.innerHTML = ""; // TEMP for reloading the appointments
 
     const placedAppt = []; // Keeps track of which appointments are placed
 
     apptArray.forEach((appt, index) => {
       const card = document.createElement("div");
 
-
-      card.addEventListener('click', function () { loadCard(this) });
+      card.addEventListener("click", function () {
+        loadCard(this);
+      });
       card.id = index;
 
       card.className = "appointment-card";
@@ -203,17 +210,15 @@ function appointmentOverview() {
 
   generateTimeTable();
   generateAppointments();
-
 }
 
-
-// Doesn't work yet;
+// Button functions
 function prevNextBtns() {
-  const prevBtn = document.getElementById('prevDay');
-  const nextBtn = document.getElementById('nextDay');
+  const prevBtn = document.getElementById("prevDay");
+  const nextBtn = document.getElementById("nextDay");
 
-  prevBtn.addEventListener('click', function () {
-    const dateString = document.getElementById('date').getAttribute('date');
+  prevBtn.addEventListener("click", function () {
+    const dateString = document.getElementById("date").getAttribute("date");
     const format = "d-m-Y"; // Day-Month-Year format
 
     // Convert string to Date object
@@ -222,16 +227,14 @@ function prevNextBtns() {
     const readableDate = flatpickr.formatDate(dateObj, "F j, Y");
     const useableDate = flatpickr.formatDate(dateObj, "d-m-Y");
 
-    console.log(dateObj, readableDate, useableDate);
-
-    const pageDateAtr = document.getElementById('date');
+    const pageDateAtr = document.getElementById("date");
     pageDateAtr.innerHTML = readableDate;
-    pageDateAtr.setAttribute('date', useableDate);
-    switchPage('dayPage');
-  })
+    pageDateAtr.setAttribute("date", useableDate);
+    switchPage("dayPage");
+  });
 
-  nextBtn.addEventListener('click', function () {
-    const dateString = document.getElementById('date').getAttribute('date');
+  nextBtn.addEventListener("click", function () {
+    const dateString = document.getElementById("date").getAttribute("date");
     const format = "d-m-Y"; // Day-Month-Year format
 
     // Convert string to Date object
@@ -240,13 +243,11 @@ function prevNextBtns() {
     const readableDate = flatpickr.formatDate(dateObj, "F j, Y");
     const useableDate = flatpickr.formatDate(dateObj, "d-m-Y");
 
-    console.log(dateObj, readableDate, useableDate);
-
-    const pageDateAtr = document.getElementById('date');
+    const pageDateAtr = document.getElementById("date");
     pageDateAtr.innerHTML = readableDate;
-    pageDateAtr.setAttribute('date', useableDate);
-    switchPage('dayPage');
-  })
+    pageDateAtr.setAttribute("date", useableDate);
+    switchPage("dayPage");
+  });
 }
 
-prevNextBtns()
+prevNextBtns();

@@ -64,7 +64,8 @@ function saveAppointment() {
     date: dateEl.value,
     startTime: timeEl.value,
     endTime: endTimeEl.value,
-    description: descriptionEl.value.trim()
+    description: descriptionEl.value.trim(),
+    index: appointments.length,
   };
 
   // Controleer alle velden
@@ -73,13 +74,13 @@ function saveAppointment() {
     return;
   }
 
-  if (!edit) {
+  if (edit === null) {
     // Voeg toe aan array
     const pageDate = document.getElementById('date');
     pageDate.setAttribute('date', dateEl.value);
     appointments.push(appointment);
     saveAppointments();
-    initCalendar();
+    
 
     // Reset formulier
     idEl.value = '';
@@ -88,6 +89,7 @@ function saveAppointment() {
     endTimeEl.value = '';
     descriptionEl.value = '';
 
+    initCalendar();
     switchPage('dayPage');
 
   } else {
@@ -97,7 +99,7 @@ function saveAppointment() {
     appointments[edit].endTime = endTimeEl.value;
     appointments[edit].description = descriptionEl.value.trim();
     saveAppointments();
-    initCalendar();
+    
     edit = null;
 
     const pageDate = document.getElementById('date');
@@ -109,6 +111,7 @@ function saveAppointment() {
     endTimeEl.value = '';
     descriptionEl.value = '';
 
+    initCalendar();
     switchPage('dayPage');
   }
 
@@ -134,3 +137,13 @@ function changeAppointment(index) {
   saveAppointments();
   initCalendar();
 }
+
+
+// So the day view page loads the current date and the correct appointments
+const dateObj = new Date();
+      const readableDate = flatpickr.formatDate(dateObj, "F j, Y");
+      const useableDate = flatpickr.formatDate(dateObj, "d-m-Y");
+
+      const pageDateAtr = document.getElementById("date");
+      pageDateAtr.innerHTML = readableDate;
+      pageDateAtr.setAttribute("date", useableDate);
