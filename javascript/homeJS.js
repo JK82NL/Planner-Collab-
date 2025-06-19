@@ -1,8 +1,7 @@
 // Laden van afspraken uit localStorage
 // let appointments = JSON.parse(localStorage.getItem('appointments')) || [];
-
   // Laad afspraken uit localStorage
-  const appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+  var localData = JSON.parse(localStorage.getItem("appointments")) || []; // Changed const appointments to var localData
 
   function getFormattedDate(dateObj) {
     return dateObj.toISOString().split('T')[0];
@@ -18,7 +17,7 @@
     onDayCreate: function(dObj, dStr, fp, dayElem) {
       const date = getFormattedDate(dayElem.dateObj);
 
-      const hasAppointment = appointments.some(appt => {
+      const hasAppointment = localData.some(appt => {
         // appt.date = 'YYYY-MM-DD' formaat
         const parts = appt.date.split('-');
         const apptDate = new Date(parts[0], parts[1] - 1, parts[2]);
