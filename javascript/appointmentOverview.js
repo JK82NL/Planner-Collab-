@@ -215,7 +215,7 @@ function appointmentOverview() {
   generateAppointments();
 }
 
-// Doesn't work yet;
+// Button functions
 function prevNextBtns() {
   const prevBtn = document.getElementById("prevDay");
   const nextBtn = document.getElementById("nextDay");
@@ -250,13 +250,6 @@ function prevNextBtns() {
     pageDateAtr.innerHTML = readableDate;
     pageDateAtr.setAttribute("date", useableDate);
     switchPage("dayPage");
-  });
-
-  const delBtn = document.getElementById("deleteAppointments");
-
-  delBtn.addEventListener("click", function () {
-    appointments = [];
-    saveAppointments();
   });
 }
 
