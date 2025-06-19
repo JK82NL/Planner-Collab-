@@ -22,8 +22,6 @@ function appointmentOverview() {
       const readableDate = flatpickr.formatDate(dateObj, "F j, Y");
       const useableDate = flatpickr.formatDate(dateObj, "d-m-Y");
 
-      console.log(dateObj, readableDate, useableDate);
-
       const pageDateAtr = document.getElementById("date");
       pageDateAtr.innerHTML = readableDate;
       pageDateAtr.setAttribute("date", useableDate);
@@ -116,7 +114,6 @@ function appointmentOverview() {
 
       editBtn.addEventListener("click", function () {
         edit = apptArray[card.id].index;
-        console.log(edit);
         idEl.value = apptArray[card.id].id;
         dateEl.value = apptArray[card.id].date;
         timeEl.value = apptArray[card.id].startTime;

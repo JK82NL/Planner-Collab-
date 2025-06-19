@@ -75,11 +75,9 @@ function saveAppointment() {
   }
 
   if (edit === null) {
-    console.log(edit);
     // Voeg toe aan array
     const pageDate = document.getElementById('date');
     pageDate.setAttribute('date', dateEl.value);
-    console.log("pageDate", pageDate);
     appointments.push(appointment);
     saveAppointments();
     
@@ -95,7 +93,6 @@ function saveAppointment() {
     switchPage('dayPage');
 
   } else {
-    console.log("appointment:" + appointments[edit]);
     appointments[edit].id = idEl.value;
     appointments[edit].date = dateEl.value;
     appointments[edit].startTime = timeEl.value;
