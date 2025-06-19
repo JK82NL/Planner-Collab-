@@ -68,7 +68,7 @@ function appointmentOverview() {
 
       // Not the prettiest code, but it works
       const cardElHTML = `
-          <div class="card p-2 position-absolute col-3 z-3">
+          <div class="card p-2 position-fixed col-3 z-3">
             <div class="row justify-content-end">
               <button class="btn btn-sm btn-danger col-1 position-absolute me-2" type="button" id="closeBtn">x</button>
             </div>

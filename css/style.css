@@ -95,8 +95,7 @@ a span {
     margin: 2px auto 0;
 }
 
-/* APPOINTMENT PAGE | DAY VIEW PAGE */
-
+/* APPOINTMENT PAGE | EDIT PAGE */
 #appointmentPage {
     display: none;
 }
@@ -127,9 +126,15 @@ a span {
 }
 
 #test-container {
-
     width: 80vw;
     height: 80vh;
+}
+
+/* EDIT BUTTON STYLE */
+.day-btn {
+    color: var(--dark);
+    background: color-mix(in oklab, var(--yellow), var(--red));
+    /* box-shadow: 10 20px 40px rgba(240, 179, 111, 1);*/
 }
 
 .time-table {
@@ -172,4 +177,4 @@ footer {
         color-mix(in oklab, var(--dark), var(--dark))
     );
     border-radius: 15px;
-}
+} */
