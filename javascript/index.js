@@ -24,8 +24,10 @@ function saveAppointments() {
 }
 
 function getFormattedDate(dateObj) {
-  // Retourneert ISO yyyy-mm-dd formaat
-  return dateObj.toISOString().split('T')[0];
+  const day = String(dateObj.getDate()).padStart(2, '0');
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // maanden zijn 0-gebaseerd
+  const year = dateObj.getFullYear();
+  return `${day}-${month}-${year}`;
 }
 
 function initCalendar() {
