@@ -73,6 +73,31 @@ a span {
     display: none;
 }
 
+.flatpickr-day:hover {
+    background: color-mix(in oklab, var(--yellow), var(--light));
+}
+
+.flatpickr-day.today {
+    background: var(--yellow);
+    color: var(--light);
+    border: solid 1px color-mix(in oklab, var(--yellow), var(--purple));
+}
+
+.flatpickr-day.today:hover {
+    background: color-mix(in oklab, var(--yellow), var(--light));
+    border: solid 1px var(--pink);
+}
+
+.flatpickr-day.selected {
+    background: var(--red);
+    border: solid 1px color-mix(in oklab, var(--pink), var(--purple));
+}
+
+.flatpickr-day.selected:hover {
+    background: var(--pink);
+    border: solid 1px var(--red);
+}
+
 /* Adjust spacing so the scaled calendar doesn't overflow */
 #inline-calendar-home {
     overflow: visible;
@@ -88,11 +113,14 @@ a span {
 /* Dot showing when there are appointments on that specific day in the calendar */
 .dot-indicator {
     display: block;
+    position: relative;
     width: 6px;
     height: 6px;
-    background-color: red;
+    background-color: var(--red);
+    border: 1px solid solid 1px color-mix(in oklab, var(--pink), var(--purple));
     border-radius: 50%;
     margin: 2px auto 0;
+    z-index: 1000;
 }
 
 /* APPOINTMENT PAGE | EDIT PAGE */
