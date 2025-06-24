@@ -1,15 +1,15 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* color variables */
 :root {
-    --light: #ffffff;
-    --yellow: #f0b36f;
-    --pink: #e17480;
-    --red: #d44b79;
-    --purple: #6b335e;
-    --dark: #3f1734;
+  --light: #ffffff;
+  --yellow: #f0b36f;
+  --pink: #e17480;
+  --red: #d44b79;
+  --purple: #6b335e;
+  --dark: #3f1734;
 }
 
 /* Loads custom font */
@@ -21,149 +21,181 @@
 }*/
 
 body {
-    margin: 5px;
-    padding: 5px;
-    font-size: 16px;
-    font-family: "Nunito Sans", sans-serif;
-    background: linear-gradient(
-        145deg,
-        color-mix(in oklab, var(--yellow), var(--light)),
-        color-mix(in oklab, var(--yellow), var(--yellow)),
-        color-mix(in oklab, var(--yellow), var(--red))
-    );
-    background-attachment: fixed;
-    background-size: cover;
+  margin: 5px;
+  padding: 5px;
+  font-size: 16px;
+  font-family: "Nunito Sans", sans-serif;
+  background: linear-gradient(
+    145deg,
+    color-mix(in oklab, var(--yellow), var(--light)),
+    color-mix(in oklab, var(--yellow), var(--yellow)),
+    color-mix(in oklab, var(--yellow), var(--red))
+  );
+  background-attachment: fixed;
+  background-size: cover;
 
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
 /* Navigation Bar */
 
 img.logo {
-    width: 60px;
-    height: 60px;
+  width: 60px;
+  height: 60px;
 }
 
 .brandname {
-    color: color-mix(in oklab, var(--yellow), var(--red));
-    font-size: 32px;
+  color: color-mix(in oklab, var(--yellow), var(--red));
+  font-size: 32px;
 }
 
 .nav-text {
-    color: var(--purple);
-    font-weight: 600;
-    font-size: 12px;
+  color: var(--purple);
+  font-weight: 600;
+  font-size: 12px;
 }
 
 .nav-spacer {
-    color: color-mix(in oklab, var(--yellow), var(--pink));
-    font-size: 16px;
+  color: color-mix(in oklab, var(--yellow), var(--pink));
+  font-size: 16px;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 a span {
-    font-weight: 900;
+  font-weight: 900;
 }
 
 /* MONTH VIEW PAGE | MAIN CALENDAR */
 #monthPage {
-    display: none;
+  display: none;
+}
+
+.flatpickr-day:hover {
+  background: color-mix(in oklab, var(--yellow), var(--light));
+  color: var(--red);
+}
+
+.flatpickr-day.today {
+  background: color-mix(in oklab, var(--yellow), var(--light));
+  color: var(--dark);
+  border: solid 1px color-mix(in oklab, var(--yellow), var(--purple));
+}
+
+.flatpickr-day.today:hover {
+  background: var(--yellow);
+  color: var(--light);
+  border: solid 1px var(--pink);
+}
+
+.flatpickr-day.selected {
+  background: var(--pink);
+  color: var(--dark);
+  border: solid 1px color-mix(in oklab, var(--pink), var(--purple));
+}
+
+.flatpickr-day.selected:hover {
+  background: var(--red);
+  color: var(--light);
+  border: solid 1px var(--red);
 }
 
 /* Adjust spacing so the scaled calendar doesn't overflow */
 #inline-calendar-home {
-    overflow: visible;
-    width: fit-content;
+  overflow: visible;
+  width: fit-content;
 }
 
 /* Scaled calendar to be bigger, added in style so it only affects this calendar not the standard calendar in the form. */
 .homepage-body .flatpickr-calendar {
-    transform: scale(1.5);
-    transform-origin: center;
+  transform: scale(1.5);
+  transform-origin: center;
 }
 
 /* Dot showing when there are appointments on that specific day in the calendar */
 .dot-indicator {
-    display: block;
-    width: 6px;
-    height: 6px;
-    background-color: red;
-    border-radius: 50%;
-    margin: 2px auto 0;
+  display: block;
+  position: relative;
+  width: 6px;
+  height: 6px;
+  background-color: var(--red);
+  border: 1px solid solid 1px color-mix(in oklab, var(--pink), var(--purple));
+  border-radius: 50%;
+  margin: 2px auto 0;
+  z-index: 1000;
 }
 
 /* APPOINTMENT PAGE | EDIT PAGE */
 #appointmentPage {
-    display: none;
+  display: none;
 }
 
 #timeTable .timeSlot {
-    position: absolute;
-    width: 100%;
-    border-bottom: 1px solid #ccc;
-    font-size: 0.8rem;
-    color: #666;
+  position: absolute;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+  font-size: 0.8rem;
+  color: #666;
 }
 
 .appointment-card {
-    position: absolute;
-    width: 100%;
-    background-color: #cce5ff;
-    border-left: 4px solid #004085;
-    padding: 0.5rem;
-    border-radius: 0.25rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    z-index: 2;
+  position: absolute;
+  width: 100%;
+  background-color: #cce5ff;
+  border-left: 4px solid #004085;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  z-index: 2;
 }
 
 /* DAY VIEW PAGE */
 #dayPage {
-    display: none;
+  display: none;
 }
 
 #test-container {
-    width: 80vw;
-    height: 80vh;
+  width: 80vw;
+  height: 80vh;
 }
 
 /* EDIT BUTTON STYLE */
 .day-btn {
-    color: var(--dark);
-    background: color-mix(in oklab, var(--yellow), var(--red));
-    /* box-shadow: 10 20px 40px rgba(240, 179, 111, 1);*/
+  color: var(--dark);
+  background: color-mix(in oklab, var(--yellow), var(--red));
+  /* box-shadow: 10 20px 40px rgba(240, 179, 111, 1);*/
 }
 
 .time-table {
-    height: 550px;
-    /* height: fit-content; */
+  height: 550px;
+  /* height: fit-content; */
 }
 
 #timeTable {
-    height: 1440px;
-    /* height: fit-content; */
+  height: 1440px;
+  /* height: fit-content; */
 }
 
 #appointmentgrid {
-    height: 1440px;
-    /* height: fit-content; */
+  height: 1440px;
+  /* height: fit-content; */
 }
 
 /* Footer with Brandname & Copyright text */
 
 footer {
-    /* position: fixed;
+  /* position: fixed;
     bottom: 0; */
-    margin-top: auto;
-    color: color-mix(in oklab, var(--yellow), var(--purple));
-    font-size: 16px;
+  margin-top: auto;
+  color: color-mix(in oklab, var(--yellow), var(--purple));
+  font-size: 16px;
 }
 
 .footername {
-    color: color-mix(in oklab, var(--yellow), var(--purple));
+  color: color-mix(in oklab, var(--yellow), var(--purple));
 }
 
 /* Keeping if needed. !!! DELETE B4 FINISHED PRODUCT !!! */
